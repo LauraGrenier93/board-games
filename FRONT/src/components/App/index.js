@@ -20,7 +20,7 @@ import Events from 'src/containers/Events';
 import OneEvent from 'src/containers/OneEvent';
 import AddArticle from 'src/containers/AddArticle';
 import Profil from 'src/containers/Profil';
-import RGPD from 'src/components/RGPD';
+import RGPD from 'src/containers/RGPD';
 import Footer from 'src/components/Footer';
 import ProtectedRoute from 'src/components/ProtectedRoute';
 import Error from 'src/components/Error';

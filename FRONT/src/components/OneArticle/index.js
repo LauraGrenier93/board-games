@@ -48,7 +48,7 @@ const OneArticle = ({
       setTimeout(() => {
         setMessage('', 'message');
         setUserIsSignIn(false);
-      }, 20000);
+      }, 60000);
     }
     const [openModalDelete, setOpenModalDelete] = React.useState(false);
     const [open, setOpen] = React.useState(false);

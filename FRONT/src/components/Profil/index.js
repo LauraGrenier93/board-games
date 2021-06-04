@@ -6,8 +6,10 @@ import {
 import './styles.css';
 
 const Profil = ({
-  pseudo, firstName, lastName, emailAddress, role,
+  pseudo, firstName, lastName, emailAddress, role,  error,
 }) => (
+  <>
+  {error && <p className="error">{error}</p>}
   <div>
     <Card className="profil">
       <Card.Content>
@@ -22,7 +24,7 @@ const Profil = ({
       </Card.Content>
     </Card>
   </div>
-
+  </>
 );
 Profil.propTypes = {
   pseudo: PropTypes.string.isRequired,

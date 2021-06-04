@@ -32,7 +32,7 @@ const Events = ({
     if(message){
       setTimeout(() => {
         setMessage('', 'message')
-      }, 20000);
+      }, 60000);
     }
   // function that is triggered when I add an article using the addNewEvent props
   useEffect(async() => {

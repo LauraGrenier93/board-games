@@ -7,6 +7,7 @@ const mapStateToProps = (state) => ({
   pseudo: state.user.pseudo,
   emailAddress: state.user.emailAddress,
   role: state.user.role,
+  error: state.user.error,
 });
 
 // const mapDispatchToProps = {};

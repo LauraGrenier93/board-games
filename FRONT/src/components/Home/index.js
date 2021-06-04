@@ -25,7 +25,6 @@ const Home = ({
   messageHome,
   message,
   setMessage,
-
   errorArticles,
   errorEvents,
   errorGames,
@@ -53,7 +52,7 @@ const Home = ({
      if(message){
       setTimeout(() => {
         setMessage('', 'message')
-      }, 20000);
+      }, 60000);
     }
   return (
     <div className="home">

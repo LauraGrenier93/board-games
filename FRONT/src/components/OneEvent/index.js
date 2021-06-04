@@ -36,7 +36,7 @@ const OneEvent = ({
     if(message){
       setTimeout(() => {
         setMessage('', 'message')
-      }, 20000);
+      }, 60000);
     }
 
   const [openParticipation, setOpenParticipation] = React.useState(false);

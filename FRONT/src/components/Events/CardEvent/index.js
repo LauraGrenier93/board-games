@@ -14,21 +14,8 @@ const CardEvent = ({
   creatorPseudo,
   id,
 }) => {
-     /**
- * function that starts a timer to initialise the message after 20 seconds
- */
-      if(message){
-        setTimeout(() => {
-          setMessage('', 'message')
-        }, 20000);
-      }
   return (
     <>
-      {error && <p className="error">{error}</p>}
-      {message && <p className="success">{message}</p>}
-      {(loadingEvents)?
-        <Loader active inline="centered" />
-       :(<>
       <Card className="cardEvent" as={Link} to={`/evenements/${id}`} style={{ backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
         <Card.Content textAlign="center">
           <Card.Header>{ eventTag}</Card.Header>
@@ -43,8 +30,6 @@ const CardEvent = ({
         </Card.Content>
       </Card>
     </>
-        )}
-        </>
   );
 };
 CardEvent.propTypes = {

@@ -29,7 +29,7 @@ function Contact({
      if(message){
       setTimeout(() => {
         setMessage('', 'message')
-      }, 20000);
+      }, 60000);
     }
   return (
     <>

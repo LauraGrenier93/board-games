@@ -1,8 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const RGPD = () => (
+const RGPD = ({
+  error,
+  message,
+  setMessage,
+}) => {
+      /**
+   * function that starts a timer to initialise the message after 20 seconds
+   */
+       if(message){
+        setTimeout(() => {
+          setMessage('', 'message')
+        }, 60000);
+      }
+  return (
   <>
+   {error && <p className="error">{error}</p>}
+   {message && <p className="success">{message}</p>}
     <div className="rgpd">
 
       <h1>Page RGPD</h1>
@@ -103,4 +119,10 @@ const RGPD = () => (
     </div>
   </>
 );
+  }
+  RGPD.propTypes = {
+    error: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    setMessage: PropTypes.func.isRequired,
+  };
 export default RGPD;
