@@ -1,0 +1,4 @@
+.ui.borderless.menu {
+  background-color: transparent;
+  align-self: flex-end;
+}

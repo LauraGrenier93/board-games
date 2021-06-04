@@ -1,0 +1,15 @@
+{
+    "swaggerDefinition": {
+        "info": {
+            "description": "Welcome to the Guardians of the Legend API",
+            "title": "The guardians of the legend",
+            "version": "1.0.0"
+        },
+        "basePath": "/",
+        "produces": [
+            "application/json"
+        ],
+        "schemes": ["http"]
+    },
+    "files": ["./app/router.js"]
+}

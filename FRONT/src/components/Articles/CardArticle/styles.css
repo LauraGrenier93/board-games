@@ -1,0 +1,37 @@
+.content>.ui.cards>.ui.fluid.card.card.article {
+  border: 1px solid #f5ce72 !important;
+  border-radius: 8px !important;
+  color: black;
+  background-color: rgba(255, 255, 255, 1.0);
+  max-height: 500px;
+  overflow: hidden;
+  width: 100%;
+  margin: 2.3rem;
+}
+
+.ui.card .meta,
+.ui.cards>.card .meta {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+.ui.cards a.card,
+.ui.link.card,
+.ui.link.cards .card,
+.a.ui.card {
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  border: 1px solid #f5ce72 !important;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 5px #666;
+  color: black;
+  background-color: rgba(255, 255, 255, 1.0);
+}
+
+@media (min-width: 760px) {
+  .ui.card.card.article{
+  flex: auto;
+  width: 38%;
+}
+}

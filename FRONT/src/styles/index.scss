@@ -1,0 +1,7 @@
+// @use 'reset';
+@use 'vars';
+
+body {
+  padding: vars.$padding x2;
+}
+

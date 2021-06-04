@@ -1,0 +1,22 @@
+.ui.fluid.card.card.oneGames {
+  width: 100%;
+  margin: 2.3rem;
+  border: 1px solid #f5ce72 !important;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 5px #666;
+  color: black;
+  background-color: rgba(255, 255, 255, 1.0);
+}
+
+.ui.card>.content p:last-child,
+.ui.cards>.card>.content p.aloneInfo {
+  display: flex;
+  flex-direction: row;
+  width: 98%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+p.aloneInfo>span {
+  text-transform: uppercase;
+}
