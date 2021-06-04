@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  Card, Button, Modal, Icon,
+  Card, Button, Modal, Icon, Loader
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -16,19 +16,32 @@ const OneEvent = ({
   fetchArticles,
   fetchEvents,
   fetchGames,
+  setMessage,
+  loadingEvents,
+  errorEvents,
+  error,
+  message,
 }) => {
   /**
- * function that is performed once when the page is refreh
+ * function that is performed once when the page is displayed
  */
-if(!event){
    useEffect(() => {
     fetchArticles();
     fetchEvents(); 
     fetchGames(); 
-  }, []);
-}
+  }, [!event]);
+    /**
+ * function that starts a timer to initialise the message after 20 seconds
+ */
+    if(message){
+      setTimeout(() => {
+        setMessage('', 'message')
+      }, 20000);
+    }
+
   const [openParticipation, setOpenParticipation] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+
   const handleClickparticipation = (evt) => {
     evt.preventDefault();
     idEventSelected(event.id);
@@ -38,7 +51,6 @@ if(!event){
 
   const handleClickUnsubscribe = (evt) => {
     evt.preventDefault();
-    console.log('je suis dans handleClickUnsubscribe');
     idEventSelected(event.id);
     unsubscribe();
     setOpen(false);
@@ -53,6 +65,14 @@ if(!event){
   
   return (
     <>
+       {error && <p className="error">{error}</p>}
+      {message && <p className="success">{message}</p>}
+      {(loadingEvents)?
+        <Loader active inline="centered" />
+       :(<>
+        {errorEvents? 
+        <p className="error">{errorEvents}</p> 
+        :(
       <Card className="cardEvent" as={Link} to={`/evenements/{event.id}`} style={{ backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
         <Card.Content textAlign="center">
           <Card.Header>{ event.eventTag}</Card.Header>
@@ -130,6 +150,9 @@ if(!event){
           )}
         </Card.Content>
       </Card>
+          )}
+          </>
+          )}
     </>
   );
 };
@@ -140,9 +163,15 @@ OneEvent.propTypes = {
   fetchGames: PropTypes.func.isRequired,
   idEventSelected: PropTypes.func.isRequired,
   unsubscribe: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired,
   toParticipate: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  loadingEvents: PropTypes.bool.isRequired,
+  errorEvents: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
   event: PropTypes.object,
+
 };
 
 OneEvent.defaultProps = {

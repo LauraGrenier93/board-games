@@ -5,7 +5,7 @@ import {
 } from 'src/actions/articles';
 import { fetchGames } from 'src/actions/games';
 import { fetchEvents } from 'src/actions/events';
-import {  setError } from 'src/actions/user';
+import {  setError,setUserIsSignIn,setMessage } from 'src/actions/user';
 
 const mapStateToProps = (state) => (
   {
@@ -15,7 +15,10 @@ const mapStateToProps = (state) => (
     editArticle: state.articles.editArticle,
     deleteArticle: state.articles.deleteArticle,
     newTagId: state.articles.newTagId,
-    error: state.user.error
+    error: state.user.error,
+    message: state.user.message,
+    loadingArticles: state.articles.loadingArticles,
+    errorArticles:state.user.errorArticles,
   });
 const mapDispatchToProps = (dispatch) => ({
   idArticleSelected: (id) => dispatch(idArticleSelected(id)),
@@ -24,10 +27,13 @@ const mapDispatchToProps = (dispatch) => ({
   sendDeleteArticle: () => dispatch(sendDeleteArticle()),
   editNewTitle: (title) => dispatch(editNewTitle(title)),
   editDescription: (description) => dispatch(editDescription(description)),
-  setError: (error) => dispatch(setError(error)),
   fetchArticles: () => dispatch(fetchArticles()),
   fetchGames: () => dispatch(fetchGames()),
   fetchEvents: () => dispatch(fetchEvents()),
+  setMessage:(message, name)=> dispatch(setMessage(message, name)),
+  setError: (error) => dispatch(setError(error)),
+  setUserIsSignIn: (bool) => dispatch(setUserIsSignIn(bool)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OneArticle);

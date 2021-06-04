@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, Modal,
+  Button, Modal,Loader
 } from 'semantic-ui-react';
 import Field from 'src/components/Field';
 import ContentEvents from 'src/components/Events/ContentEvents';
@@ -20,7 +20,20 @@ const Events = ({
   fetchEvents,
   addNewEvent,
   initValueAddNewEvent,
+  loadingEvents,
+  errorEvents,
+  error,
+  message,
+  setMessage
 }) => {
+   /**
+ * function that starts a timer to initialise the message after 20 seconds
+ */
+    if(message){
+      setTimeout(() => {
+        setMessage('', 'message')
+      }, 20000);
+    }
   // function that is triggered when I add an article using the addNewEvent props
   useEffect(async() => {
       await fetchEvents();
@@ -36,6 +49,15 @@ const Events = ({
   };
   return (
     <>
+      {error && <p className="error">{error}</p>}
+      {message && <p className="success">{message}</p>}
+      {(loadingEvents)?
+        <Loader active inline="centered" />
+       :(<>
+        {errorEvents? 
+        <p className="error">{errorEvents}</p> 
+        :(
+          <>
       {isLogged && (
       <Modal
         size="fullscreen"
@@ -103,20 +125,29 @@ const Events = ({
       <ContentEvents
         elements={events}
       />
+       </>
+          )}
+          </>
+       )}
     </>
   );
 };
 Events.propTypes = {
-  events: PropTypes.array,
+  events: PropTypes.array.isRequired,
   changeFieldEvent: PropTypes.func.isRequired,
   handleAddEvent: PropTypes.func.isRequired,
   initValueAddNewEvent: PropTypes.func.isRequired,
+  fetchEvents: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired,
   newTitle: PropTypes.string.isRequired,
   newDescription: PropTypes.string.isRequired,
   newEventDate: PropTypes.string.isRequired,
-  isLogged: PropTypes.bool,
-  addNewEvent: PropTypes.bool,
-  fetchEvents: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  errorEvents: PropTypes.string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  addNewEvent: PropTypes.bool.isRequired,
+  loadingEvents: PropTypes.bool.isRequired,
 };
 
 

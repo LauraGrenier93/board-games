@@ -7,6 +7,8 @@ const mapStateToProps = (state) => (
     games: state.games.games,
     error: state.user.error,
     message: state.user.message,
+    loadingGames: state.games.loadingGames,
+    errorGames:state.user.errorGames,
   });
   const mapDispatchToProps = (dispatch) => ({
     setMessage:(message, name)=> dispatch(setMessage(message, name)),

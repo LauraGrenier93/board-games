@@ -15,15 +15,14 @@ const OneGame = ({
   fetchGames,
 }) =>{
     /**
- * function that is performed once when the page is refreh
+ * function that is performed once when the page is displayed
  */
-if(!game){
   useEffect(() => {
    fetchArticles();
    fetchEvents(); 
    fetchGames(); 
- }, []);
-}
+ }, [!game]);
+
      /**
    * function that starts a timer to initialise the message after 20 seconds
    */
@@ -86,4 +85,7 @@ OneGame.propTypes = {
   fetchEvents: PropTypes.func.isRequired,
   fetchGames: PropTypes.func.isRequired,
 };
+OneGame.defaultProps = {
+  game: {},
+}
 export default OneGame;

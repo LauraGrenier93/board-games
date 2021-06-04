@@ -19,7 +19,6 @@ export const initialState = {
   password: '',
   logged: false,
   signIn: false,
-  loading: false,
   messageHome: '',
   messageLogin: '',
   message:'',

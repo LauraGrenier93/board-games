@@ -85,14 +85,14 @@ const Home = ({
       {(loadingArticles)?
        <Loader active inline="centered" />
       :(<>
-      :{isLogged && (
+      {isLogged && (
       <Link to="/ajoutArticle">
         <Button content="Ajouter un article" labelPosition="left" icon="edit" />
       </Link>
       )}
       {errorArticles?
       <p className="error">{errorArticles}</p>
-      :<ContentArticles elements={articles} />
+      :(<ContentArticles elements={articles} />)
       }
       </>
       )}

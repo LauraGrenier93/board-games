@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, Modal, Button, } from 'semantic-ui-react';
+import React, { useEffect } from 'react';
+import { Card, Modal, Button, Loader } from 'semantic-ui-react';
 import { nameTagId } from 'src/selectors';
 import { Redirect, Link } from 'react-router-dom';
 import TextAreaDescription from 'src/components/TextAreaDescription';
@@ -21,22 +21,35 @@ const OneArticle = ({
   editNewTitle,
   editDescription,
   sendDeleteArticle,
+  setUserIsSignIn,
   error,
+  loadingArticles,
+  errorArticles,
   setError,
   fetchArticles,
   fetchEvents,
   fetchGames,
+  setMessage,
+  message,
 }) => {
     /**
- * function that is performed once when the page is refreh
+ * function that is performed once when the page is displayed
  */
-if(!article){
   useEffect(() => {
    fetchArticles();
    fetchEvents(); 
    fetchGames(); 
- }, []);
-}
+ }, [!article]);
+
+    /**
+ * function that starts a timer to initialise the message after 20 seconds
+ */
+     if(message){
+      setTimeout(() => {
+        setMessage('', 'message');
+        setUserIsSignIn(false);
+      }, 20000);
+    }
     const [openModalDelete, setOpenModalDelete] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     /**
@@ -75,10 +88,17 @@ if(!article){
       }, 30000);
     }
   return(
-    <>
+   <>
     {error && <p className="error">{error}</p>}
-    {!editArticle && (
-      <>
+    {message && <p className="success">{message}</p>}
+    {(loadingArticles)?
+        <Loader active inline="centered" />
+       :(<>
+        {errorArticles? 
+        <p className="error">{errorArticles}</p> 
+        :(
+          <>
+      {!editArticle && (
         <Card className="card oneArticle">
           <Card.Content textAlign="center" className="card__content">
             <Card.Header>{article.title}{article.eventDate && `pour la date du ${article.eventDate}`}</Card.Header>
@@ -92,7 +112,6 @@ if(!article){
             </Card.Description>
           </Card.Content>
         </Card>
-        </>
       )}
       {pseudo === article.authorPseudo && (
       <>
@@ -215,28 +234,36 @@ if(!article){
         <Redirect to="/" exact />
         </>
       )}
-     </>
+      </>
+      )}
+    </>
+  )}
+  </>
   );
   };
 OneArticle.propTypes = {
-  article: PropTypes.object,
-  newTagId: PropTypes.string.isRequired,
-  pseudo: PropTypes.string.isRequired,
   sendEditArticle: PropTypes.func.isRequired,
   sendDeleteArticle: PropTypes.func.isRequired,
   changeFieldArticle: PropTypes.func.isRequired,
   idArticleSelected: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired,
+  setUserIsSignIn: PropTypes.func.isRequired,
   editNewTitle: PropTypes.func.isRequired,
   editDescription: PropTypes.func.isRequired,
-    fetchEvents: PropTypes.func.isRequired,
+  fetchEvents: PropTypes.func.isRequired,
   fetchArticles: PropTypes.func.isRequired,
   fetchGames: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired,
   editArticle: PropTypes.bool.isRequired,
   deleteArticle: PropTypes.bool.isRequired,
+  loadingArticles: PropTypes.bool.isRequired,
   newTitle: PropTypes.string.isRequired,
   newDescription: PropTypes.string.isRequired,
-  error: PropTypes.string,
+  newTagId: PropTypes.string.isRequired,
+  pseudo: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  article: PropTypes.object,
 };
 OneArticle.defaultProps = {
   article: {},
