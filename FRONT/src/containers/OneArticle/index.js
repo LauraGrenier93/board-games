@@ -16,6 +16,10 @@ const mapStateToProps = (state) => (
     deleteArticle: state.articles.deleteArticle,
     newTagId: state.articles.newTagId,
     error: state.user.error,
+    errornewTitle: state.user.errornewTitle,
+    errornewDescription: state.user.errornewDescription,
+    errorEditArticle: state.user.errorEditArticle,
+    errorDeleteArticle: state.user.errorDeleteArticle,
     message: state.user.message,
     loadingArticles: state.articles.loadingArticles,
     errorArticles:state.user.errorArticles,
@@ -33,6 +37,7 @@ const mapDispatchToProps = (dispatch) => ({
   setMessage:(message, name)=> dispatch(setMessage(message, name)),
   setError: (error) => dispatch(setError(error)),
   setUserIsSignIn: (bool) => dispatch(setUserIsSignIn(bool)),
+  handleBlur: (error, name) => dispatch(setError(error, name)),
 
 });
 

@@ -22,23 +22,36 @@ const OneArticle = ({
   editDescription,
   sendDeleteArticle,
   setUserIsSignIn,
-  error,
   loadingArticles,
+  error,
+  errornewTitle,
+  errornewDescription,
   errorArticles,
-  setError,
+  errorEditArticle,
+  errorDeleteArticle,
+  handleBlur,
   fetchArticles,
   fetchEvents,
   fetchGames,
   setMessage,
   message,
 }) => {
+  const errorsEditArticle= ['errornewTitle','errornewDescription', 'errorEditArticle'];
+  const errors = [errornewTitle,errornewDescription, errorEditArticle];
+  console.log('components onearticle errors', errors);
     /**
  * function that is performed once when the page is displayed
  */
   useEffect(() => {
    fetchArticles();
    fetchEvents(); 
-   fetchGames(); 
+   fetchGames();
+   if (!newTitle) {
+    editNewTitle(article.title);
+  }
+  if (!newDescription) {
+    editDescription(article.description);
+  }
  }, [!article]);
 
     /**
@@ -59,8 +72,12 @@ const OneArticle = ({
     const handleEditArticleSubmit = (evt) => {
       evt.preventDefault();
       idArticleSelected(article.id);
+     if(newTitle || newDescription){
       sendEditArticle();
       setOpen(false);
+     } else {
+        handleBlur('Il faut un titre et une description de plus de 15 caractères à votre article.', 'errorEditArticle');
+      }
     };
         /**
      * function that is triggered when the form is submitted to delete an item
@@ -72,20 +89,15 @@ const OneArticle = ({
           sendDeleteArticle();
           setOpenModalDelete(false);
         };
-
-  if (!newTitle) {
-    editNewTitle(article.title);
-  }
-  if (!newDescription) {
-    editDescription(article.description);
-  }
    /**
-   * function that starts a timer to initialise the message after 30 seconds
+   * function that starts a timer to initialise the message after 60 seconds
    */
-    if(error){
+    if(errorsEditArticle){
+      for(const error of errorsEditArticle){
       setTimeout(() => {
-        setError('')
-      }, 30000);
+        handleBlur('', error);
+      }, 60000);
+    }
     }
   return(
    <>
@@ -98,23 +110,14 @@ const OneArticle = ({
         <p className="error">{errorArticles}</p> 
         :(
           <>
-      {!editArticle && (
-        <Card className="card oneArticle">
-          <Card.Content textAlign="center" className="card__content">
-            <Card.Header>{article.title}{article.eventDate && `pour la date du ${article.eventDate}`}</Card.Header>
-            <Card.Header className="tag">{article.tagName}</Card.Header>
-            <Card.Meta>
-              <span className="author">{article.authorPseudo}</span>
-              <span className="date">mise en ligne le { article.updatedDate || article.createdDate }</span>
-            </Card.Meta>
-            <Card.Description>
-              {article.description}
-            </Card.Description>
-          </Card.Content>
-        </Card>
-      )}
       {pseudo === article.authorPseudo && (
       <>
+      {deleteArticle && (
+      <>
+        <p className="succes">Votre article a bien été supprimé.Vous allez être redirigé vers la page d'accueil.</p>
+        <Redirect to="/" exact />
+        </>
+      )}
       <Modal
                 id="delete"
                 onClose={() => setOpenModalDelete(false)}
@@ -149,6 +152,7 @@ const OneArticle = ({
           trigger={<Button content="Modifier votre article" labelPosition="left" icon="edit" />}
         >
           <Modal.Header>Modifier votre article</Modal.Header>
+          { errors && errors.map((error,index)=>(<p key={index.toString()} className="error">{error}</p>))}
           <Modal.Description>
             <form autoComplete="off" onSubmit={handleEditArticleSubmit} className="addEvent">
               <Field
@@ -156,9 +160,9 @@ const OneArticle = ({
                 type="texte"
                 placeholder="titre de votre article"
                 onChange={changeFieldArticle}
-                value={newTitle === '' ? article.title : newTitle}
-                required
-                focus
+                onBlur={handleBlur}
+                value={newTitle}
+
               />
               <div className="button-radio">
 
@@ -168,7 +172,8 @@ const OneArticle = ({
                   id="news"
                   value="1"
                   onChange={changeFieldArticle}
-                  required
+                  onBlur={handleBlur}
+                  checked="checked"
                 />
                 <label htmlFor="news">News</label>
 
@@ -178,6 +183,7 @@ const OneArticle = ({
                   id="evenement"
                   value="2"
                   onChange={changeFieldArticle}
+                  onBlur={handleBlur}
                 />
                 <label htmlFor="evenement">Évenement</label>
                 <Field
@@ -186,6 +192,7 @@ const OneArticle = ({
                   id="salons"
                   value="3"
                   onChange={changeFieldArticle}
+                  onBlur={handleBlur}
                 />
                 <label htmlFor="salons">Salons</label>
               </div>
@@ -194,8 +201,8 @@ const OneArticle = ({
                 name="newDescription"
                 placeholder="écrivez votre article"
                 onChange={changeFieldArticle}
-                value={newDescription === '' ? article.description : newDescription}
-                required
+                value={newDescription}
+                onBlur={handleBlur}
               />
 
               <Button open={open} onClick={() => setOpen(false)}>
@@ -209,10 +216,10 @@ const OneArticle = ({
         </Modal>
       </>
       )}
-      {editArticle && (
-        <>
-        <p className="success">Votre article a bien été modifier</p>
-        <p className="success" >Pour reprendre votre navigation cliquer sur<Link to="/">retourner à la page d'accueil"</Link></p>
+      {editArticle?
+        (<>
+        <p className="success">Votre article a bien été modifié</p>
+        <p className="success" >Pour reprendre votre navigation cliquer sur<Link to="/"> retourner à la page d'accueil"</Link></p>
         <Card className="card oneArticle">
           <Card.Content textAlign="center" className="card__content">
             <Card.Header>{newTitle}</Card.Header>
@@ -227,11 +234,24 @@ const OneArticle = ({
           </Card.Content>
         </Card>
         </>
-      )}
-       {deleteArticle && (
-      <>
-        <p className="succes">Votre article a bien été supprimé.Vous allez être redirigé vers la page d'accueil.</p>
-        <Redirect to="/" exact />
+      )
+      :(
+        <>
+        {errorEditArticle && <p className="error">{errorEditArticle}</p>}
+        {errorDeleteArticle && <p className="error">{errorDeleteArticle}</p>}
+      <Card className="card oneArticle">
+          <Card.Content textAlign="center" className="card__content">
+            <Card.Header>{article.title}{article.eventDate && `pour la date du ${article.eventDate}`}</Card.Header>
+            <Card.Header className="tag">{article.tagName}</Card.Header>
+            <Card.Meta>
+              <span className="author">{article.authorPseudo}</span>
+              <span className="date">mise en ligne le { article.updatedDate || article.createdDate }</span>
+            </Card.Meta>
+            <Card.Description>
+              {article.description}
+            </Card.Description>
+          </Card.Content>
+        </Card>
         </>
       )}
       </>
@@ -254,6 +274,7 @@ OneArticle.propTypes = {
   fetchArticles: PropTypes.func.isRequired,
   fetchGames: PropTypes.func.isRequired,
   setMessage: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func,
   editArticle: PropTypes.bool.isRequired,
   deleteArticle: PropTypes.bool.isRequired,
   loadingArticles: PropTypes.bool.isRequired,
@@ -261,6 +282,11 @@ OneArticle.propTypes = {
   newDescription: PropTypes.string.isRequired,
   newTagId: PropTypes.string.isRequired,
   pseudo: PropTypes.string.isRequired,
+  errornewTitle:PropTypes.string,
+  errornewDescription:PropTypes.string,
+  errorEditArticle:PropTypes.string,
+  errorDeleteArticle:PropTypes.string,
+  errorArticle:PropTypes.string,
   error: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   article: PropTypes.object,
@@ -269,5 +295,6 @@ OneArticle.defaultProps = {
   article: {},
   newTitle: 'un titre',
   newDescription: 'un description',
-}
+};
+
 export default OneArticle;

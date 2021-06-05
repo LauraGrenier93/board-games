@@ -9,7 +9,6 @@ const mapStateToProps = (state) => (
     newDescription: state.articles.newDescription,
     newArticle: state.articles.newArticle,
     newTagId: state.articles.newTagId,
-    errornewTagId: state.user.errornewTagId,
     errornewTitle: state.user.errornewTitle,
     errornewDescription: state.user.errornewDescription,
     errorAddArticle: state.user.errorAddArticle,

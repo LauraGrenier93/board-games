@@ -15,14 +15,14 @@ const AddArticle = ({
   newArticle,
   newTagId,
   handleBlur,
-  errornewTagId,
+  error,
   errornewTitle,
   errornewDescription,
   errorAddArticle,
   pseudo,
 }) => {
-  const errorsNewArticle= ['errornewTitle','errornewTagId','errornewDescription', 'errorAddArticle'];
-  const errors = [errornewTitle,errornewDescription,errornewTagId, errorAddArticle];
+  const errorsNewArticle= ['errornewTitle','errornewDescription', 'errorAddArticle'];
+  const errors = [errornewTitle,errornewDescription, errorAddArticle, error];
   const date = new Date();
   const options = {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
@@ -33,7 +33,11 @@ const AddArticle = ({
    */
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    if(newTitle || newDescription){
     handleAddArticle();
+  } else {
+    handleBlur('Il faut un titre et une description de plus de 15 caractères à votre article.', 'errorEditArticle');
+  }
   };
    /**
    * function that starts a timer to initialise the error message or after 60 seconds
@@ -139,6 +143,7 @@ AddArticle.propTypes = {
   errornewTitle:PropTypes.string,
   errornewDescription:PropTypes.string,
   errorAddArticle:PropTypes.string,
+  error: PropTypes.string,
   handleBlur: PropTypes.func,
   newTagId: PropTypes.string.isRequired,
   pseudo: PropTypes.string.isRequired,

@@ -32,11 +32,13 @@ const SignInForm = ({
    */
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (password === passwordConfirm) {
-      handleSignInForm();
-    }
-    else {
+    if (password !== passwordConfirm) {
       handleBlur('La confirmation du mot de passe est incorrecte', 'errorSubmitSignInform');
+    } else if (!firstName || !lastName || !pseudo || !emailAddress || !passwordConfirm || !password){
+      handleBlur('Il faut que tous les champs soient remplis', 'errorSubmitSignInform');
+    }
+    else{
+      handleSignInForm();
   };
 }
   if(errorNames){

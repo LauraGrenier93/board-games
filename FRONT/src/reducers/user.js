@@ -23,6 +23,9 @@ export const initialState = {
   messageLogin: '',
   message:'',
   errorArticles: '',
+  errorAddArticle:'',
+  errorEditArticle:'',
+  errorDeleteArticle:'',
   errorGames:'',
   errorEvents:'',
   errorfirstName:'',
@@ -36,7 +39,6 @@ export const initialState = {
   errorSendLogin:'',
   errornewTitle:'',
   errornewDescription:'',
-  errornewTagId:'',
   error:'',
   newemail: '',
 };
@@ -100,7 +102,6 @@ export default (state = initialState, action = {}) => {
         errorSubmitSignInform:'',
         errorSendSignIn:'',
         errorSendLogin:'',
-        errorAddArticle:'',
         error:'',
         newEmail: '',
       };

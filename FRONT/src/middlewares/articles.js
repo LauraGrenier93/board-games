@@ -68,11 +68,6 @@ export default (store) => (next) => async (action) => {
         else {
           store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu ajouter l\'articles.', 'errorAddArticle'));
         }
-          console.log('error', error);
-        console.log('error.response', error.response);
-        console.log('error.response.data', error.response);
-        console.log('error.response.status', error.response.status);
-        console.log('error.response.headers', error.response.headers);
       }
       return next(action);
     }
@@ -94,11 +89,18 @@ export default (store) => (next) => async (action) => {
         store.dispatch(setEditArticle(true));
       }
       catch (error) {
-        console.log('error', error);
-        console.log('error.response.data', error.response.data);
-        console.log('error.response.status', error.response.status);
-        console.log('error.response.headers', error.response.headers);
-        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu  modifier l\'articles.'));
+        if(error.response.data === '"title" is not allowed to be empty'){
+          store.dispatch(setError('Le champs titre de l\'article ne peut être vide. Votre article n\'a pas pu être enregistré', 'errorEditArticle'));
+        }
+        else if(error.response.data ==='"description" is not allowed to be empty'){
+          store.dispatch(setError('Le champs description de l\'article ne peut être vide.', 'errorEditArticle'));
+        }
+        else if(error.response.data ==='"description" length must be at least 15 characters long'){
+          store.dispatch(setError('La description de l\'article doit contenir au moins 15 caractères.', 'errorEditArticle'));
+        }
+        else {
+          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu  modifier l\'articles.', 'errorEditArticle'));
+        }
       }
       return next(action);
     }
@@ -116,11 +118,7 @@ export default (store) => (next) => async (action) => {
         store.dispatch(setMessage('Votre article a bien été supprimé'));
       }
       catch (error) {
-        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu supprimer l\'article.'));
-        console.log('error', error);
-        console.log('error.response.data', error.response.data);
-        console.log('error.response.status', error.response.status);
-        console.log('error.response.headers', error.response.headers);
+        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu supprimer l\'article.', 'errorDeleteArticle'));
       }
       return next(action);
     }

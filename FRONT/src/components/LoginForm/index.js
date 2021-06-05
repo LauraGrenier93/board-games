@@ -24,7 +24,11 @@ const LoginForm = ({
    */
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    if(pseudo || password){
     handleLogin();
+  } else {
+    handleBlur('Il faut que les champs pseudo et password soient remplis.','errorSendLogin');
+  }
   };
 
    /**
