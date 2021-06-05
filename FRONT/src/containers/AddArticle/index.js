@@ -9,12 +9,16 @@ const mapStateToProps = (state) => (
     newDescription: state.articles.newDescription,
     newArticle: state.articles.newArticle,
     newTagId: state.articles.newTagId,
+    errornewTagId: state.user.errornewTagId,
+    errornewTitle: state.user.errornewTitle,
+    errornewDescription: state.user.errornewDescription,
+    errorAddArticle: state.user.errorAddArticle,
     error: state.user.error,
     pseudo: state.user.pseudo,
   });
 const mapDispatchToProps = (dispatch) => ({
   changeFieldArticle: (value, name) => dispatch(setFieldValueArticle(value, name)),
   handleAddArticle: () => dispatch(sendAddArticle()),
-  handleBlur: (error) => dispatch(setError(error)),
+  handleBlur: (error, name) => dispatch(setError(error, name)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddArticle);

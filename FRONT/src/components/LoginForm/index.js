@@ -70,7 +70,7 @@ const LoginForm = ({
                   value={pseudo}
                   onBlur={handleBlur}
                 />
-                <span className="popup"> Votre pseudo doit comporter au minimim 3 caractéres... </span>
+                <span className="popup"> Votre pseudo doit comporter au minimim 3 caractères... </span>
               </div>
 
               <div className="input">
@@ -83,7 +83,7 @@ const LoginForm = ({
                   value={password}
                   onBlur={handleBlur}
                 />
-                <span className="popup"> Votre password doit avoir un nombre minimum de 8 caractéres, une lettre majuscule, une lettre minuscule et un caractére spécial parmis : !@#$%^&* </span>
+                <span className="popup"> Votre password doit avoir un nombre minimum de 8 caractères, une lettre majuscule, une lettre minuscule et un caractére spécial parmis : !@#$%^&* </span>
               </div>
 
               <button

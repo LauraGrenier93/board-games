@@ -26,7 +26,7 @@ export default (store) => (next) => async (action) => {
         store.dispatch(setEvents(response.data));
       }
       catch (error) {
-        store.dispatch(setError('Nous avons eu un problème technique pour afficher les évènements.', 'errorEvents'));
+        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu afficher les évènements.', 'errorEvents'));
       }
       finally{
         store.dispatch(setLoading(false, 'loadingEvents'));
@@ -79,7 +79,7 @@ export default (store) => (next) => async (action) => {
         console.log('error.response.data', error.response.data);
         console.log('error.response.status', error.response.status);
         console.log('error.response.headers', error.response.headers);
-        store.dispatch(setError('Nous avons eu un problème technique pour ajouter l\'évènement.'));
+        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu ajouter votre participation à l\'évènement.'));
       }
       return next(action);
     }
@@ -100,7 +100,7 @@ export default (store) => (next) => async (action) => {
       }
 
       catch (error) {
-        store.dispatch(setError('Nous avons eu un problème technique pour supprimer votre participation à l\'évènement.'));
+        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu supprimer votre participation à l\'évènement.'));
       }
       return next(action);
     }

@@ -15,10 +15,14 @@ const AddArticle = ({
   newArticle,
   newTagId,
   handleBlur,
-  error,
+  errornewTagId,
+  errornewTitle,
+  errornewDescription,
+  errorAddArticle,
   pseudo,
 }) => {
-  console.log("components AddArticle newArticle", newArticle);
+  const errorsNewArticle= ['errornewTitle','errornewTagId','errornewDescription', 'errorAddArticle'];
+  const errors = [errornewTitle,errornewDescription,errornewTagId, errorAddArticle];
   const date = new Date();
   const options = {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
@@ -32,22 +36,25 @@ const AddArticle = ({
     handleAddArticle();
   };
    /**
-   * function that starts a timer to initialise the error message or after 30 seconds
+   * function that starts a timer to initialise the error message or after 60 seconds
    */
-    if(error){
+    if(errorsNewArticle){
+      for(const error of errorsNewArticle){
       setTimeout(() => {
-        handleBlur('');
-      }, 30000);
+        handleBlur('', error);
+      }, 60000);
     }
+    }
+    
   return (
     <>
       <h1>Ajout d'un article</h1>
-      {error && <p className="error">{error}</p>}
+      { errors && errors.map((error,index)=>(<p key={index.toString()} className="error">{error}</p>))}
       {newArticle ? (
       <>
             <p className="success">Votre article est bien enregistré, vous pouvez modifier
               votre article en allant sur celui-ci dans la page d'accueil </p>
-            <p className="success" >Pour reprendre votre navigation cliquer sur<Link to="/">retourner à la page d'accueil"</Link></p>
+            <p className="success" >Pour reprendre votre navigation cliquer sur<Link to="/"> retourner à la page d'accueil"</Link></p>
 
             <Card className="card oneArticle">
               <Card.Content textAlign="center" className="card__content">
@@ -80,7 +87,9 @@ const AddArticle = ({
                 type="radio"
                 id="news"
                 value="1"
+                onBlur={handleBlur}
                 onChange={changeFieldArticle}
+                checked="checked"
               />
               <label htmlFor="news">News</label>
 
@@ -89,6 +98,7 @@ const AddArticle = ({
                 type="radio"
                 id="evenement"
                 value="2"
+                onBlur={handleBlur}
                 onChange={changeFieldArticle}
 
               />
@@ -98,8 +108,8 @@ const AddArticle = ({
                 type="radio"
                 id="salons"
                 value="3"
+                onBlur={handleBlur}
                 onChange={changeFieldArticle}
-          
               />
               <label htmlFor="salons">Salons</label>
             </div>
@@ -126,7 +136,9 @@ AddArticle.propTypes = {
   changeFieldArticle: PropTypes.func.isRequired,
   newTitle: PropTypes.string.isRequired,
   newDescription: PropTypes.string.isRequired,
-  error: PropTypes.string,
+  errornewTitle:PropTypes.string,
+  errornewDescription:PropTypes.string,
+  errorAddArticle:PropTypes.string,
   handleBlur: PropTypes.func,
   newTagId: PropTypes.string.isRequired,
   pseudo: PropTypes.string.isRequired,

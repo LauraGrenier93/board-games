@@ -34,6 +34,9 @@ export const initialState = {
   errorSubmitSignInform:'',
   errorSendSignIn:'',
   errorSendLogin:'',
+  errornewTitle:'',
+  errornewDescription:'',
+  errornewTagId:'',
   error:'',
   newemail: '',
 };
@@ -97,6 +100,7 @@ export default (state = initialState, action = {}) => {
         errorSubmitSignInform:'',
         errorSendSignIn:'',
         errorSendLogin:'',
+        errorAddArticle:'',
         error:'',
         newEmail: '',
       };

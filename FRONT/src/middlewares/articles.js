@@ -18,14 +18,16 @@ export default (store) => (next) => async (action) => {
   
   const urlEditArticle = `/articles/${idArticle}`;
   const urlDeleteArticle = `/articles/${idArticle}`;
+
   switch (action.type) {
+
     case FETCH_ARTICLES: {
       try {
         const response = await axios.get('articles');
         store.dispatch(setArticles(response.data));
       }
       catch (error) {
-        store.dispatch(setError('Nous avons eu un problème technique pour afficher les articles.', 'errorArticles'));
+        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu afficher les articles.', 'errorArticles'));
       }
       finally{
         store.dispatch(setLoading(false, 'loadingArticles'));
@@ -54,8 +56,20 @@ export default (store) => (next) => async (action) => {
         store.dispatch(setAddNewArticle(true));
       }
       catch (error) {
-        store.dispatch(setError('Nous avons eu un problème technique pour ajouter l\'articles.'));
-        console.log('error', error);
+        if(error.response.data === '"title" is not allowed to be empty'){
+          store.dispatch(setError('Le champs titre de l\'article ne peut être vide.', 'errorAddArticle'));
+        }
+        else if(error.response.data ==='"description" is not allowed to be empty'){
+          store.dispatch(setError('Le champs description de l\'article ne peut être vide.', 'errorAddArticle'));
+        }
+        else if(error.response.data ==='"description" length must be at least 15 characters long'){
+          store.dispatch(setError('La description de l\'article doit contenir au moins 15 caractères.', 'errorAddArticle'));
+        }
+        else {
+          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu ajouter l\'articles.', 'errorAddArticle'));
+        }
+          console.log('error', error);
+        console.log('error.response', error.response);
         console.log('error.response.data', error.response);
         console.log('error.response.status', error.response.status);
         console.log('error.response.headers', error.response.headers);
@@ -84,7 +98,7 @@ export default (store) => (next) => async (action) => {
         console.log('error.response.data', error.response.data);
         console.log('error.response.status', error.response.status);
         console.log('error.response.headers', error.response.headers);
-        store.dispatch(setError('Nous avons eu un problème technique pour modifier l\'articles.'));
+        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu  modifier l\'articles.'));
       }
       return next(action);
     }
@@ -102,7 +116,7 @@ export default (store) => (next) => async (action) => {
         store.dispatch(setMessage('Votre article a bien été supprimé'));
       }
       catch (error) {
-        store.dispatch(setError('Nous avons eu un problème technique pour supprimer l\'article.'));
+        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu supprimer l\'article.'));
         console.log('error', error);
         console.log('error.response.data', error.response.data);
         console.log('error.response.status', error.response.status);

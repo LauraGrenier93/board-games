@@ -10,7 +10,7 @@ export default (store) => (next) => async (action) => {
         store.dispatch(setGames(response.data));
       }
       catch (error) {
-        store.dispatch(setError('Nous avons eu un problème technique pour afficher les jeux.', 'errorGames'));
+        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu afficher les jeux.', 'errorGames'));
       }
       finally{
         store.dispatch(setLoading(false, 'loadingGames'));

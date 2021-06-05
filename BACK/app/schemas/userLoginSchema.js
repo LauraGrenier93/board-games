@@ -15,14 +15,14 @@ const userLoginSchema = Joi.object({
       .required()
       .messages({
         'string.empty': `Le champs de votre pseudo ne peut être vide !`,
-        'string.min': `Votre pseudo doit doit avoir un minimum de {#limit} caractéres!`,
-        'string.max': `Votre pseudo doit doit avoir un maximum de {#limit} caractéres !`,
+        'string.min': `Votre pseudo doit doit avoir un minimum de {#limit} caractères!`,
+        'string.max': `Votre pseudo doit doit avoir un maximum de {#limit} caractères !`,
       }),
   password: Joi.string()
       .pattern(new RegExp(/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/))
       .required()
       .messages({
-    'string.pattern.base':'Le format de votre mot de passe est incorrect : Il doit contenir au minimum 8 caractéres avec minimum, un chiffre, une lettre majuscule, une lettre minuscule et un carctére spécial parmis : ! @ # $% ^ & *',
+    'string.pattern.base':'Le format de votre mot de passe est incorrect : Il doit contenir au minimum 8 caractères avec minimum, un chiffre, une lettre majuscule, une lettre minuscule et un carctére spécial parmis : ! @ # $% ^ & *',
    }),
 });
 module.exports = userLoginSchema;

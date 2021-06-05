@@ -17,11 +17,11 @@ const TextAreaDescription = ({
     onChange(evt.target.value, name);
   };
   const handleBlur = (evt) => {
+    // console.log('components TextAreaDescription evt.target', evt.target.value);
+    // console.log('components TextAreaDescription value', value);
     const nameInputFr = "description de l'article";
-    const valueInput = evt.target.value;
-    const message = validationForm(valueInput, name, nameInputFr);
-    console.log('message handleBlur', message);
-    onBlur(message);
+    const message = validationForm(value, name, nameInputFr);
+    onBlur(message, 'error'+name);
   };
 
   const inputId = `field-${name}`;

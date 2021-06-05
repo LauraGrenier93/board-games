@@ -16,13 +16,11 @@ const Field = ({
   // console.log('components Field value', value);
     onChange(evt.target.value, name);
   };
-  const handleBlur = () => {
+  const handleBlur = (evt) => {
    // console.log('components Field evt.target', evt.target.value);
    // console.log('components Field value', value);
-    const valueInput = value;
-    const message = validationForm(valueInput, name, placeholder);
-    console.log('components field handleblur error+name','error'+ name)
-    onBlur(message, 'error'+ name);
+   const message = validationForm(value, name, placeholder);
+   onBlur(message, 'error'+name);
   };
 
   return (
@@ -35,6 +33,7 @@ const Field = ({
         type={type}
         placeholder={placeholder}
         name={name}
+        checked
       />
     </div>
   );

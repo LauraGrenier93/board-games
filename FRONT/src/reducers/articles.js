@@ -33,7 +33,7 @@ export const initialState = {
   loadingArticles: true,
   newTitle: '',
   newDescription: '',
-  newTagId: "1",
+  newTagId: '',
   newArticleDate: '',
   idArticle: '',
 };

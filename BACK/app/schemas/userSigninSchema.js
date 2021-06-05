@@ -23,8 +23,8 @@ const userSigninSchema = Joi.object({
       .pattern(/^\S{2,}$/)
       .messages({
         'string.empty': `Le champs de votre prénom ne peut être vide !`,
-        'string.min': `Votre prenom doit avoir une longeur minimum de {#limit} caractéres !`,
-        'string.pattern.base':'Le format de votre prénom est incorrect : il doit contenir au minimum 2 caractéres et ne pas être composé d\'espaces !',
+        'string.min': `Votre prenom doit avoir une longeur minimum de {#limit} caractères !`,
+        'string.pattern.base':'Le format de votre prénom est incorrect : il doit contenir au minimum 2 caractères et ne pas être composé d\'espaces !',
 
       }),
   lastName: Joi.string()
@@ -33,8 +33,8 @@ const userSigninSchema = Joi.object({
       .pattern(/^\S{2,}$/)
       .messages({
         'string.empty': `Le champs de votre nom ne peut être vide !`,
-        'string.min': `Votre nom doit avoir une longeur minimum de {#limit} caractéres !`,
-        'string.pattern.base':'Le format de votre nom est incorrect : il doit contenir au minimum 2 caractéres et ne pas être composé d\'espaces ! ',
+        'string.min': `Votre nom doit avoir une longeur minimum de {#limit} caractères !`,
+        'string.pattern.base':'Le format de votre nom est incorrect : il doit contenir au minimum 2 caractères et ne pas être composé d\'espaces ! ',
 
       }),
   emailAddress: Joi.string()
@@ -50,16 +50,16 @@ const userSigninSchema = Joi.object({
      .required()
      .messages({
       'string.empty': `Le champs de votre pseudo ne peut être vide !`,
-      'string.min': `Votre pseudo doit doit avoir un minimum de {#limit} caractéres!`,
-      'string.max': ` Votre pseudo doit doit avoir un maximum de {#limit} caractéres !`,
-      'string.pattern.base':' Le format de votre pseudo est incorrect : il doit contenir au minimum 3 caractéres et ne pas être composé d\'espaces !',
+      'string.min': `Votre pseudo doit doit avoir un minimum de {#limit} caractères!`,
+      'string.max': ` Votre pseudo doit doit avoir un maximum de {#limit} caractères !`,
+      'string.pattern.base':' Le format de votre pseudo est incorrect : il doit contenir au minimum 3 caractères et ne pas être composé d\'espaces !',
 
     }),
   password: Joi.string()
      .pattern(new RegExp(/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/))
      .required()
      .messages({
-      'string.pattern.base':'Le format de votre mot de passe est incorrect : Il doit contenir au minimum 8 caractéres avec minimum, un chiffre, une lettre majuscule, une lettre minuscule et un carctére spécial parmis : ! @ # $% ^ & * ',
+      'string.pattern.base':'Le format de votre mot de passe est incorrect : Il doit contenir au minimum 8 caractères avec minimum, un chiffre, une lettre majuscule, une lettre minuscule et un carctére spécial parmis : ! @ # $% ^ & * ',
      }),
   passwordConfirm: Joi.ref('password')
 }).with('password', 'passwordConfirm');
