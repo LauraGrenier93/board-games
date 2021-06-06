@@ -37,8 +37,8 @@ it('setGames must set games', () => {
         game_type: 'base',
         game_categories: [''],
         preview: '',
-        }]
+        }];
       const action = setGames(newValueGames);
       const newState = gamesReducer(initialState, action);
-      expect(newState).to.be.eql({games: newValueGames});
+      expect(newState).to.be.eql({games: newValueGames,loadingGames:true} );
   });

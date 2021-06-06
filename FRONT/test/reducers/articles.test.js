@@ -39,7 +39,7 @@ describe('actions', () => {
       updateDate: null,
       authorId: 2,
       authorPseudo: '',
-      tagId: 1,
+      tagId: "",
       tagName: 'News',
     preview: '', }];
     const action = setArticles(newValueArticles);
@@ -52,8 +52,9 @@ describe('actions', () => {
       newTitle: '',
       newDescription: '',
       newArticleDate: '',
-      newTagId: '1',
+      newTagId: '',
       idArticle: '',
+      loadingArticles: true,
     });
   });
 
@@ -78,7 +79,8 @@ describe('actions', () => {
             newArticle: newValueArticle,
             newTitle: '',
             newDescription: '',
-            newTagId: '1',
+            newTagId: '',
+            loadingArticles: true,
             newArticleDate: '',
             idArticle: '',
           });
@@ -109,7 +111,8 @@ describe('actions', () => {
           newArticle: false,
           newTitle: titleValue,
           newDescription: '',
-          newTagId: '1',
+          loadingArticles: true,
+          newTagId: '',
           newArticleDate: '',
           idArticle: '',
         });

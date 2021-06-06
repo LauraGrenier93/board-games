@@ -49,6 +49,8 @@ describe('reducer for events', ()=>{
         idEvent: '',
         toParticipate: false,
         newEvent: false,
+        editEvent: false,
+        loadingEvents: true,
     });
   });
     it('setAddNewEvent must set add new events', () => {
@@ -78,6 +80,8 @@ describe('reducer for events', ()=>{
           idEvent: '',
           toParticipate: false,
           newEvent: newValueEvent,
+          editEvent: false,
+          loadingEvents: true,
         });
     
       });
@@ -110,6 +114,8 @@ describe('reducer for events', ()=>{
           idEvent: '',
           toParticipate: false,
           newEvent: false,
+          editEvent: false,
+          loadingEvents: true,
         });
     });
       it('idEventSelected must set id events selected', () => {
@@ -139,6 +145,8 @@ describe('reducer for events', ()=>{
             idEvent: newValueIdEvent,
             toParticipate: false,
             newEvent: false,
+            editEvent: false,
+            loadingEvents: true,
           });
       
         });
@@ -170,6 +178,8 @@ describe('reducer for events', ()=>{
           idEvent: '',
           toParticipate: toParticipate,
           newEvent: false,
+          editEvent: false,
+          loadingEvents: true,
         });
     
       });

@@ -105,7 +105,7 @@ export default (state = initialState, action = {}) => {
         errorSendSignIn:'',
         errorSendLogin:'',
         error:'',
-        newEmail: '',
+        newemail: '',
       };
     case SET_USER_IS_SIGN_IN:
       return {
