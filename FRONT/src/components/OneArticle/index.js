@@ -72,7 +72,7 @@ const OneArticle = ({
     const handleEditArticleSubmit = (evt) => {
       evt.preventDefault();
       idArticleSelected(article.id);
-     if(newTitle || newDescription){
+     if(newTitle && newDescription && newTagId){
       sendEditArticle();
       setOpen(false);
      } else {
@@ -173,7 +173,6 @@ const OneArticle = ({
                   value="1"
                   onChange={changeFieldArticle}
                   onBlur={handleBlur}
-                  checked="checked"
                 />
                 <label htmlFor="news">News</label>
 

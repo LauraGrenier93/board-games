@@ -33,7 +33,7 @@ const AddArticle = ({
    */
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if(newTitle || newDescription){
+    if(newTitle && newDescription &&newTagId){
     handleAddArticle();
   } else {
     handleBlur('Il faut un titre et une description de plus de 15 caractères à votre article.', 'errorEditArticle');

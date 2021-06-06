@@ -75,11 +75,24 @@ export default (store) => (next) => async (action) => {
       }
 
       catch (error) {
-        console.log('error', error);
-        console.log('error.response.data', error.response.data);
-        console.log('error.response.status', error.response.status);
-        console.log('error.response.headers', error.response.headers);
-        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu ajouter votre participation à l\'évènement.'));
+        if(error.response.data === '"title" is not allowed to be empty'){
+          store.dispatch(setError('Le champs titre de l\'évènement ne peut être vide.', 'errorAddEvent'));
+        }
+        else if(error.response.data ==='"description" is not allowed to be empty'){
+          store.dispatch(setError('Le champs description de l\'évènement ne peut être vide.', 'errorAddEvent'));
+        }
+        else if(error.response.data ==='"description" length must be at least 15 characters long'){
+          store.dispatch(setError('La description de l\'évènement doit contenir au moins 15 caractères.', 'errorAddEvent'));
+        }
+        else if(error.response.data ==='"eventDate" must be a valid date'){
+          store.dispatch(setError('Il manque la date de l\'évènement.', 'errorAddEvent'));
+        }
+        else if(error.response.data ==='"tagId" must be a number'){
+          store.dispatch(setError('Il manque la catégorie de l\'évènement.', 'errorAddEvent'));
+        }
+        else {
+          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu ajouter l\'évènements.', 'errorAddEvent'));
+        }
       }
       return next(action);
     }

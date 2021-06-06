@@ -16,16 +16,23 @@ const Events = ({
   newTitle,
   newDescription,
   newEventDate,
+  newTagId,
   isLogged,
   fetchEvents,
   addNewEvent,
   initValueAddNewEvent,
   loadingEvents,
+  handleBlur,
   errorEvents,
+  errornewTitle,
+  errornewDescription,
+  errorAddEvent,
   error,
   message,
   setMessage
 }) => {
+  const errorsNewEvent= ['errornewTitle','errornewDescription', 'errorAddEvent'];
+  const errors = [errornewTitle,errornewDescription, errorAddEvent, error];
    /**
  * function that starts a timer to initialise the message after 20 seconds
  */
@@ -34,7 +41,7 @@ const Events = ({
         setMessage('', 'message')
       }, 60000);
     }
-  // function that is triggered when I add an article using the addNewEvent props
+  // function that is triggered when I add an event using the addNewEvent props
   useEffect(async() => {
       await fetchEvents();
     initValueAddNewEvent();
@@ -44,12 +51,27 @@ const Events = ({
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+  //  if(newTitle && newDescription && newEventDate && newTagId){
     handleAddEvent();
     setOpen(false);
+ /* } else {
+    handleBlur('Il faut un titre, une description de plus de 15 caractères, une date pour l\'évènement et une catégorie', 'errorAddEvent');
+  }*/
   };
+     /**
+   * function that starts a timer to initialise the error message or after 60 seconds
+   */
+      if(errorsNewEvent){
+        for(const error of errorsNewEvent){
+        setTimeout(() => {
+          handleBlur('', error);
+        }, 60000);
+      }
+      }
   return (
     <>
       {error && <p className="error">{error}</p>}
+      {errorAddEvent && <p className="error">{errorAddEvent}</p>}
       {message && <p className="success">{message}</p>}
       {(loadingEvents)?
         <Loader active inline="centered" />
@@ -68,12 +90,14 @@ const Events = ({
       >
         <Modal.Header>Ajout d'un évènement</Modal.Header>
         <Modal.Description>
+        { errors && errors.map((error,index)=>(<p key={index.toString()} className="error">{error}</p>))}
           <form autoComplete="off" onSubmit={handleSubmit} className="addEvent">
             <Field
               name="newTitle"
               type="texte"
               placeholder="titre de votre évènement"
               onChange={changeFieldEvent}
+              onBlur={handleBlur}
               value={newTitle}
             />
             <Field
@@ -81,6 +105,7 @@ const Events = ({
               type="datetime-local"
               placeholder="date de l'évènement"
               value={newEventDate}
+              onBlur={handleBlur}
               onChange={changeFieldEvent}
             />
             <div className="button-radio">
@@ -90,7 +115,9 @@ const Events = ({
                 type="radio"
                 id="new"
                 value="1"
+                onBlur={handleBlur}
                 onChange={changeFieldEvent}
+
               />
               <label htmlFor="new">Soirée jeux</label>
 
@@ -99,6 +126,7 @@ const Events = ({
                 type="radio"
                 id="murderParty"
                 value="2"
+                onBlur={handleBlur}
                 onChange={changeFieldEvent}
               />
               <label htmlFor="murderParty">Murder Partie</label>
@@ -107,6 +135,7 @@ const Events = ({
               className="newDescription"
               name="newDescription"
               placeholder="écrivez votre évènement"
+              onBlur={handleBlur}
               onChange={changeFieldEvent}
               value={newDescription}
             />
@@ -143,7 +172,12 @@ Events.propTypes = {
   newDescription: PropTypes.string.isRequired,
   newEventDate: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,
+  handleBlur: PropTypes.func,
   message: PropTypes.string.isRequired,
+  newTagId: PropTypes.string.isRequired,
+  errornewTitle:PropTypes.string,
+  errornewDescription:PropTypes.string,
+  errorAddEvent:PropTypes.string,
   errorEvents: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   addNewEvent: PropTypes.bool.isRequired,

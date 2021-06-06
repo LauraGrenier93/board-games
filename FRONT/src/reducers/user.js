@@ -29,6 +29,7 @@ export const initialState = {
   errorGames:'',
   errorEvents:'',
   errorEditEvent:'',
+  errorAddEvent:'',
   errorfirstName:'',
   errorlastName:'',
   errorpseudo:'',

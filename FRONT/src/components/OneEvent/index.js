@@ -84,7 +84,7 @@ const OneEvent = ({
        const handleEditEventSubmit = (evt) => {
         evt.preventDefault();
         idEventSelected(event.id);
-       if(newTitle || newDescription){
+       if(newTitle && newDescription && newTagId && newEventDate){
         handleEditEvent();
         setOpenEditEvent(false);
        } else {

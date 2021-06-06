@@ -16,7 +16,7 @@ const Field = ({
   // console.log('components Field value', value);
     onChange(evt.target.value, name);
   };
-  const handleBlur = (evt) => {
+  const handleBlur = () => {
    // console.log('components Field evt.target', evt.target.value);
    // console.log('components Field value', value);
    const message = validationForm(value, name, placeholder);
@@ -33,7 +33,6 @@ const Field = ({
         type={type}
         placeholder={placeholder}
         name={name}
-        checked
       />
     </div>
   );

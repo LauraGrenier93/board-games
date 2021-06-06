@@ -93,7 +93,6 @@ const App = (
           render={({ match }) => {
             const { params: { id } } = match;
             const foundEvent = findIdBySlug(events, id);
-            console.log('components app route evenement/id foundEvent',foundEvent)
             return (
               <OneEvent event={foundEvent} />
             );
