@@ -51,9 +51,9 @@ export const lastArray = (array) => {
 
 /**
  * function which gives the label of the article
- * @param {string} TagId
+ * @param {string} TagId of article
  */
- export const nameTagId = (tagId) => {
+ export const nameTagIdArticle = (tagId) => {
   let tag = '';
   if (tagId === '1') {
     tag = 'News';
@@ -63,6 +63,21 @@ export const lastArray = (array) => {
   }
   else if (tagId === '3') {
     tag = 'Salons';
+  }
+  return tag;
+};
+
+/**
+ * function which gives the label of the article
+ * @param {string} TagId of event
+ */
+ export const nameTagIdEvent = (tagId) => {
+  let tag = '';
+  if (tagId === '1') {
+    tag = 'Soirée jeux';
+  }
+  else if (tagId === '2') {
+    tag = 'Murder Partie';
   }
   return tag;
 };

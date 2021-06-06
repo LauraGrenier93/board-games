@@ -32,6 +32,7 @@ export const initialState = {
   toParticipate: false,
   newEvent: false,
   loadingEvents: true,
+  editEvent:false,
 };
 
 export default (state = initialState, action = {}) => {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Card, Modal, Button, Loader } from 'semantic-ui-react';
-import { nameTagId } from 'src/selectors';
+import { nameTagIdArticle } from 'src/selectors';
 import { Redirect, Link } from 'react-router-dom';
 import TextAreaDescription from 'src/components/TextAreaDescription';
 import Field from 'src/components/Field';
@@ -205,7 +205,7 @@ const OneArticle = ({
                 onBlur={handleBlur}
               />
 
-              <Button open={open} onClick={() => setOpen(false)}>
+              <Button onClick={() => setOpen(false)}>
                 Annuler
               </Button>
               <Button onClick={handleEditArticleSubmit}>
@@ -223,7 +223,7 @@ const OneArticle = ({
         <Card className="card oneArticle">
           <Card.Content textAlign="center" className="card__content">
             <Card.Header>{newTitle}</Card.Header>
-            <Card.Header className="tag">{nameTagId(newTagId)}</Card.Header>
+            <Card.Header className="tag">{nameTagIdArticle(newTagId)}</Card.Header>
             <Card.Meta>
               <span className="author">{article.authorPseudo}</span>
               <span className="date">mise en ligne le { article.updatedDate || article.createdDate }</span>

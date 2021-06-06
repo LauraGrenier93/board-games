@@ -111,7 +111,7 @@ const Events = ({
               value={newDescription}
             />
 
-            <Button open={open} onClick={() => setOpen(false)}>
+            <Button onClick={() => setOpen(false)}>
               Annuler
             </Button>
             <Button onClick={handleSubmit}>

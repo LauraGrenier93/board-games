@@ -4,10 +4,17 @@ import {
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Field from 'src/components/Field';
+import TextAreaDescription from 'src/components/TextAreaDescription';
+import { nameTagIdEvent } from 'src/selectors';
 import './styles.css';
 
 const OneEvent = ({
+  pseudo,
   event,
+  changeFieldEvent,
+  handleEditEvent,
+  editEvent,
   participation,
   idEventSelected,
   toParticipate,
@@ -19,9 +26,15 @@ const OneEvent = ({
   setMessage,
   loadingEvents,
   errorEvents,
+  errorEditEvent,
   error,
   message,
+  newTitle,
+  newDescription,
+  newEventDate,
+  newTagId,
 }) => {
+
   /**
  * function that is performed once when the page is displayed
  */
@@ -40,7 +53,8 @@ const OneEvent = ({
     }
 
   const [openParticipation, setOpenParticipation] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [openUnsubscribe, setOpenUnsubscribe] = React.useState(false);
+  const [openEditEvent, setOpenEditEvent] = React.useState(false);
 
   const handleClickparticipation = (evt) => {
     evt.preventDefault();
@@ -53,7 +67,7 @@ const OneEvent = ({
     evt.preventDefault();
     idEventSelected(event.id);
     unsubscribe();
-    setOpen(false);
+    setOpenUnsubscribe(false);
   };
 
   useEffect(() => {
@@ -63,27 +77,138 @@ const OneEvent = ({
     info();
   }, [toParticipate]);
   
-  return (
+      /**
+     * function that is triggered when the form is submitted to modify an event
+     * @param {Event} evt 
+     */
+       const handleEditEventSubmit = (evt) => {
+        evt.preventDefault();
+        idEventSelected(event.id);
+       if(newTitle || newDescription){
+        handleEditEvent();
+        setOpenEditEvent(false);
+       } else {
+          handleBlur('Il faut un titre et une description de plus de 15 caractères à votre évènement.', 'errorEvent');
+        }
+      };
+         /**
+   * function that starts a timer to initialise the message after 60 seconds
+   */
+    if(errorEditEvent){
+      setTimeout(() => {
+        handleBlur('', errorEditEvent);
+      }, 60000);
+    }
+  return(
     <>
        {error && <p className="error">{error}</p>}
       {message && <p className="success">{message}</p>}
       {(loadingEvents)?
         <Loader active inline="centered" />
-       :(<>
+       :(
+       <>
         {errorEvents? 
         <p className="error">{errorEvents}</p> 
         :(
+        <>
+        {pseudo === event.creatorPseudo && (
+        <Modal
+        size="fullscreen"
+        onClose={() => setOpenEditEvent(false)}
+        onOpen={() => setOpenEditEvent(true)}
+        open={openEditEvent}
+        trigger={<Button content="Modifier votre évènement" labelPosition="left" icon="edit" />}
+      >
+        <Modal.Header>Modifier un évènement</Modal.Header>
+        <Modal.Description>
+          <form autoComplete="off" onSubmit={handleEditEventSubmit} className="editEvent">
+            <Field
+              name="newTitle"
+              type="texte"
+              placeholder="titre de votre évènement"
+              onChange={changeFieldEvent}
+              value={newTitle}
+            />
+            <Field
+              name="newEventDate"
+              type="datetime-local"
+              placeholder="date de l'évènement"
+              value={newEventDate}
+              onChange={changeFieldEvent}
+            />
+            <div className="button-radio">
+
+              <Field
+                name="newTagId"
+                type="radio"
+                id="new"
+                value="1"
+                onChange={changeFieldEvent}
+              />
+              <label htmlFor="new">Soirée jeux</label>
+
+              <Field
+                name="newTagId"
+                type="radio"
+                id="murderParty"
+                value="2"
+                onChange={changeFieldEvent}
+              />
+              <label htmlFor="murderParty">Murder Partie</label>
+            </div>
+            <TextAreaDescription
+              className="newDescription"
+              name="newDescription"
+              placeholder="écrivez votre évènement"
+              onChange={changeFieldEvent}
+              value={newDescription}
+            />
+
+            <Button onClick={() => setOpenEditEvent(false)}>
+              Annuler
+            </Button>
+            <Button onClick={handleEditEventSubmit}>
+              Valider
+            </Button>
+
+          </form>
+        </Modal.Description>
+      </Modal>
+    )}
+    {editEvent?
+      (
+      <>
+      <p className="success">Votre évènement a bien été modifié</p>
+      <p className="success" >Pour reprendre votre navigation cliquer sur<Link to="/"> retourner à la page d'accueil"</Link></p>
       <Card className="cardEvent" as={Link} to={`/evenements/{event.id}`} style={{ backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
         <Card.Content textAlign="center">
-          <Card.Header>{ event.eventTag}</Card.Header>
+          <Card.Header>{ nameTagIdEvent(newTagId)}</Card.Header>
           <Card.Header>{event.title} pour la date du {event.eventDate}</Card.Header>
           <Card.Meta>
             <span>{event.creatorPseudo}</span>
             <span>mise en ligne le { event.updateDate || event.createdDate }</span>
           </Card.Meta>
           <Card.Description>
-            {event.description}
+            {newDescription}
           </Card.Description>
+          </Card.Content>
+      </Card>
+        </>
+      )
+      :(
+        <>
+        {errorEditEvent && <p className="error">{errorEditEvent}</p>}
+      <Card className="cardEvent" as={Link} to={`/evenements/{event.id}`} style={{ backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
+        <Card.Content textAlign="center">
+          <Card.Header>{ event.eventTag}</Card.Header>
+          <Card.Header>{newTitle} pour la date du {event.eventDate}</Card.Header>
+          <Card.Meta>
+            <span>{event.creatorPseudo}</span>
+            <span>mise en ligne le { event.updateDate || event.createdDate }</span>
+          </Card.Meta>
+          <Card.Description>
+            {event.description}
+          </Card.Description>   
           {(isLogged && toParticipate) && (
             <>
               <p className="participation">les participants sont :
@@ -97,9 +222,9 @@ const OneEvent = ({
 
               <Modal
                 id="unsubscribe"
-                onClose={() => setOpen(false)}
-                onOpen={() => setOpen(true)}
-                open={open}
+                onClose={() => setOpenUnsubscribe(false)}
+                onOpen={() => setOpenUnsubscribe(true)}
+                open={openUnsubscribe}
                 trigger={<Button><Icon name="remove user" /></Button>}
               >
 
@@ -111,7 +236,7 @@ const OneEvent = ({
                   </p>
                 </Modal.Description>
                 <Modal.Actions>
-                  <Button onClick={() => setOpen(false)}>
+                  <Button onClick={() => setOpenUnsubscribe(false)}>
                     Non
                   </Button>
                   <Button
@@ -150,13 +275,21 @@ const OneEvent = ({
           )}
         </Card.Content>
       </Card>
-          )}
           </>
           )}
     </>
+      )}
+        
+    </>
+       )}
+  </>
   );
 };
 OneEvent.propTypes = {
+  pseudo: PropTypes.string.isRequired,
+  event: PropTypes.object,
+  changeFieldEvent: PropTypes.func.isRequired,
+  handleEditEvent: PropTypes.func.isRequired,
   participation: PropTypes.func.isRequired,
   fetchEvents: PropTypes.func.isRequired,
   fetchArticles: PropTypes.func.isRequired,
@@ -167,11 +300,15 @@ OneEvent.propTypes = {
   toParticipate: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   loadingEvents: PropTypes.bool.isRequired,
-  errorEvents: PropTypes.bool.isRequired,
+  editEvent: PropTypes.bool.isRequired,
+  errorEvents: PropTypes.string.isRequired,
+  errorEditEvent: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
-  event: PropTypes.object,
-
+  newTitle: PropTypes.string.isRequired,
+  newDescription: PropTypes.string.isRequired,
+  newTagId: PropTypes.string.isRequired,
+  newEventDate: PropTypes.string.isRequired,
 };
 
 OneEvent.defaultProps = {

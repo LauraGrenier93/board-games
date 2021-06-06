@@ -28,6 +28,7 @@ export const initialState = {
   errorDeleteArticle:'',
   errorGames:'',
   errorEvents:'',
+  errorEditEvent:'',
   errorfirstName:'',
   errorlastName:'',
   errorpseudo:'',

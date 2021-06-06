@@ -1,14 +1,16 @@
 // Types of action
 export const FETCH_EVENTS = 'FETCH_Events';
-export const SET_EVENTS = 'SET_Events';
 export const PARTICIPATION = 'PARTICIPATION';
 export const ID_EVENT_SELECTED = 'ID_EVENT_SELECTED';
 export const SEND_ADD_EVENT = 'SEND_ADD_EVENT';
-export const SET_FIELD_VALUE_EVENT = 'SET_FIELD_VALUE_EVENT';
+export const SEND_EDIT_EVENT = 'SEND_EDIT_EVENT';
 export const SEND_UNSUBSCRIBE = 'SEND_UNSUBSCRIBE';
+export const SET_EVENTS = 'SET_Events';
+export const SET_FIELD_VALUE_EVENT = 'SET_FIELD_VALUE_EVENT';
 export const SET_ADD_NEW_EVENT = 'SET_ADD_NEW_EVENT';
 export const SET_PARTICIPATE = 'SET_PARTICIPATE';
 export const INIT_VALUE_ADD_NEW_EVENT = 'INIT_VALUE_ADD_NEW_EVENT';
+
 
 
 //creation of an action
@@ -58,7 +60,6 @@ export const idEventSelected = (id) => ({
  * action that sends a new event to the database
  */
 export const sendAddEvent = () => {
-  console.log('je suis dans la fonction sendAddEvent d\'action');
   return({
   type: SEND_ADD_EVENT,
 });
@@ -97,4 +98,9 @@ export const setParticipate = (bool) => ({
   type: INIT_VALUE_ADD_NEW_EVENT,
 });
 
-
+/**
+ *  action that sends an event modification to the database
+ */
+ export const sendEditEvent = () => ({
+  type: SEND_EDIT_EVENT,
+});

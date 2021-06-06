@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import TextAreaDescription from 'src/components/TextAreaDescription';
 import { Button, Card } from 'semantic-ui-react';
 import './styles.css';
-import { nameTagId } from 'src/selectors';
+import { nameTagIdArticle } from 'src/selectors';
 
 const AddArticle = ({
   handleAddArticle,
@@ -63,7 +63,7 @@ const AddArticle = ({
             <Card className="card oneArticle">
               <Card.Content textAlign="center" className="card__content">
                 <Card.Header>{newTitle}</Card.Header>
-                <Card.Header className="tag">{nameTagId(newTagId)}</Card.Header>
+                <Card.Header className="tag">{nameTagIdArticle(newTagId)}</Card.Header>
                 <Card.Meta>
                   <span className="author">{pseudo}</span>
                   <span className="date">mise en ligne le { date.toLocaleDateString('fr-FR', options)}</span>
