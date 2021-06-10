@@ -61,5 +61,5 @@
 
 ## putting the project online
 
-the front has been posted on surge: https://mjc-boardgames.surge.sh/evenements/4
+the front has been posted on surge:https://mjc-boardgames.surge.sh/
 the back has been posted on heroku: https://mjc-boardgames.herokuapp.com/v1/
