@@ -111,7 +111,7 @@ const OneEvent = ({
         <p className="error">{errorEvents}</p> 
         :(
         <>
-        {pseudo === event.creatorPseudo && (
+        {/*pseudo === event.creatorPseudo && (
         <Modal
         size="fullscreen"
         onClose={() => setOpenEditEvent(false)}
@@ -174,13 +174,13 @@ const OneEvent = ({
           </form>
         </Modal.Description>
       </Modal>
-    )}
+        )*/}
     {editEvent?
       (
       <>
       <p className="success">Votre évènement a bien été modifié</p>
       <p className="success" >Pour reprendre votre navigation cliquer sur<Link to="/"> retourner à la page d'accueil"</Link></p>
-      <Card className="cardEvent" as={Link} to={`/evenements/{event.id}`} style={{ backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
+      <Card className="cardEvent" style={{ backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
         <Card.Content textAlign="center">
           <Card.Header>{ nameTagIdEvent(newTagId)}</Card.Header>
           <Card.Header>{event.title} pour la date du {event.eventDate}</Card.Header>
@@ -198,7 +198,7 @@ const OneEvent = ({
       :(
         <>
         {errorEditEvent && <p className="error">{errorEditEvent}</p>}
-      <Card className="cardEvent" as={Link} to={`/evenements/{event.id}`} style={{ backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
+      <Card className="cardEvent" style={{ backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
         <Card.Content textAlign="center">
           <Card.Header>{ event.eventTag}</Card.Header>
           <Card.Header>{newTitle} pour la date du {event.eventDate}</Card.Header>
@@ -276,7 +276,7 @@ const OneEvent = ({
         </Card.Content>
       </Card>
           </>
-          )}
+      )}
     </>
       )}
         

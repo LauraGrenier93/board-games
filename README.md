@@ -58,3 +58,8 @@
 * Go to the BACK folder to launch the API => ```cd FRONT ```
 * Install all [YARN](https://classic.yarnpkg.com/en/docs/) and all the yarn packages you need for this project => ``` yarn i ```
 * To launch the FRONT => ``` yarn start ```
+
+## putting the project online
+
+the front has been posted on surge: https://mjc-boardgames.surge.sh/evenements/4
+the back has been posted on heroku: https://mjc-boardgames.herokuapp.com/v1/

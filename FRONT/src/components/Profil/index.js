@@ -19,7 +19,7 @@ const Profil = ({
           <p className="profil__info"><span className="info">Votre prénom:</span><span> {firstName}</span></p>
           <p className="profil__info"><span className="info">Votre nom:</span><span> {lastName}</span></p>
           <p className="profil__info"><span className="info">Votre adresse e-mail:</span><span>{emailAddress}</span></p>
-          <p className="profil__info"><span className="info">votre role:</span><span> {role}</span></p>
+          <p className="profil__info"><span className="info">Votre role:</span><span>{role}</span></p>
         </Card.Meta>
       </Card.Content>
     </Card>
