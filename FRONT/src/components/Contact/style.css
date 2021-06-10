@@ -4,13 +4,15 @@ flex-wrap: wrap;
 flex-direction: column;
 }
  
-#marker-gdl{
+.card_mjc{
   /* margin: auto; */
   height: 100vh;
-
   border: 1px solid #f5ce72 ;
   border-radius: 8px;
   margin-bottom:2rem;
+  background-repeat: no-repeat;
+  background-size: cover!important;
+  background-position: center!important;
 }
 
 h2 {
@@ -46,7 +48,7 @@ h2 {
     flex-wrap: wrap;
     flex-direction: row;
   }
-  #marker-gdl, .contact_infos{
+  .card_mjc, .contact_infos{
     width: 44% !important;
     flex: 1 1 auto !important;
     margin-right: 2rem !important;

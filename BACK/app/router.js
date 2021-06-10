@@ -21,7 +21,6 @@ const userSigninSchema = require('./schemas/userSigninSchema');
 const articleSchema = require('./schemas/articleSchema');
 const gameSchema = require('./schemas/gameSchema');
 const eventSchema = require('./schemas/eventSchema');
-const resendEmailLinkSchema = require('./schemas/resendEmailLinkSchema');
 const participantSchema = require('./schemas/participantSchema');
 
 var guard = require('express-jwt-permissions')();
@@ -173,8 +172,6 @@ router.get('/evenements', eventController.allEvent);
  * @returns {JSON} 200 - An event has been issued
  */
 router.get('/evenements/:id(\\d+)', eventController.oneEvent);
-// email verification route during registration
-router.get('/verifyEmail', validateQuery(resendEmailLinkSchema), userController.verifyEmail);
 //! All roads below this MW will require a permit, 
 //! the presence of an unrevoked token in their headers. 
 //! Routes that we want to be accessible to non-registered people as well, should therefore be placed on top.

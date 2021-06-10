@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const validator = require("email-validator");
 const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
 const jsonwebtoken = require('jsonwebtoken');
 const randToken = require('rand-token');
 const blacklist = require('express-jwt-blacklist');
@@ -103,12 +102,6 @@ const userController = {
           error: 'la vérification du mot de passe a échoué !'
         })
       }
-
-      if (userInDb.verifyemail) {
-        console.log("La vérification du mot de passe a réussi !")
-        console.log("userInDb.id => ", userInDb.id)
-        console.log("userInDb.group_name =>", userInDb.group_name);
- 
         const jwtContent = {
           userId: userInDb.id,
           permissions: [`${userInDb.group_name}`],
@@ -143,11 +136,6 @@ const userController = {
           pseudo: userInDb.pseudo,
           role: userInDb.group_name,
         };
-      } else {
-        console.log("Accés non autorisé : Merci de vérifier votre email en cliquant sur le lien dans l'email envoyé.");
-
-        response.status(401).json("Accés non autorisé : Merci de vérifier votre email en cliquant sur le lien dans l'email envoyé lors de l'inscription.");
-      }
     } catch (error) {
       console.trace('Erreur dans la méthode handleLoginForm du userController :',
         error);
@@ -222,96 +210,9 @@ const userController = {
         pseudo: userNowInDb.pseudo,
         firstName: userNowInDb.firstName,
         lastName: userNowInDb.lastName,
-        message: "Merci de valider votre email en cliquant sur le lien envoyé avant de vous connecter."
+        message: "Votre inscription c'est bien effectuée."
       });
       console.log(`L'user ${newUser.firstName} ${newUser.lastName} est désormais enregistré dans la BDD sans que sont email soit enregistré. `);
- 
-      const jwtOptions = {
-        issuer: userNowInDb.pseudo,
-        audience: 'Lesgardiensdelalégende',
-        algorithm: 'HS256',
-        expiresIn: '24h' 
-      };
-      const jwtContent = {
-        userId: userNowInDb.id,
-        jti: userNowInDb.id + "_" + randToken.generator({
-          chars: '0-9'
-        }).generate(6)
-
-      };
-      const newToken = jsonwebtoken.sign(jwtContent, jwtSecret, jwtOptions);
-      async function main() {
-       
-        const host = request.get('host');
-        const link = `http://${host}/v1/verifyEmail?userId=${userNowInDb.id}&token=${newToken}`;
-        console.log("req.get =>", request.get);
-        console.log("ici host vaut =>", host);
-        console.log("ici link vaut => ", link);
-        console.log("newToken => ", newToken);
-        console.log("request.body.firstName => ", request.body.firstName);
-        const transporter = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 465,
-          secure: true, 
-          auth: {
-            user: process.env.EMAIL, 
-            pass: process.env.PASSWORD_EMAIL, 
-          },
-        });
-       
-        const info = await transporter.sendMail({
-          from: 'lesgardiensdelalegende@gmail.com', 
-          to: `${request.body.emailAddress}`,
-          subject: `Les gardiens de la légende : merci de confirmer votre email`, 
-          text: `Bonjour ${request.body.firstName} ${request.body.lastName}, merci de cliquer sur le lien pour vérifier votre email auprés du club de jeu Les gardiens de la légende.`, // l'envoie du message en format "plain text" ET HTML, permet plus de souplesse pour le receveur, tout le monde n'accepte pas le format html pour des raisons de sécurité sur ces boites mails, moi le premier ! 
-          html: `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
-          integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
-          crossorigin="anonymous" />
-      <style>
-      h3 {
-        font-size: 1.5rem;
-    }
-    body {
-        background-color: rgb(253, 232, 175);
-    }
-    .background {
-        display: flex
-    }
-    .medieval {
-        border-radius: 8px;
-        max-height: 500px;
-        height: 300px;
-        width: 1500px;
-        max-width: 100%;
-    }
-    .montext {
-        padding: 2rem 0 0 2rem;
-    }
-    a { 
-      padding: 1rem 0 0 0;
-    }
-      </style>
-      <body>
-          <div class="background">
-      
-              <a href="http://localhost:8080"> <img class="medieval"
-                      src="https://eapi.pcloud.com/getpubthumb?code=XZlztkZqnIb2V9qFI4z3M5DI9gDBQIu0TfX&linkpassword=undefined&size=870x217&crop=0&type=auto"
-                      alt="medieval"> </a>
-          </div>
-                <div class="montext">
-              <h3>Bonjour <span class="username"> ${newUser.firstName} ${newUser.lastName}, </span> </h3> <br>
-              <p>Vous souhaitez vous inscrire au club de jeux des gardiens de la legende.</p> <br> 
-              <p>Merci de cliquer sur le lien pour vérifier votre email auprés du club de jeu Les gardiens de la légende. </p> <br>
-              <a href="${link}">cliquez ici pour vérifier votre email. </a> <br>
-              <p>L'administrateur du site Les gardiens de la légende.</p> <br>
-              <a href="http://localhost:8080"> Les gardiens de la légendes</a>
-                </div>
-            </body>`,
-        });
-        console.log("Message sent: %s", info.messageId);
-        console.log(`Un email de vérification bien envoyé a ${newUser.firstName} ${newUser.lastName} via l'adresse email: ${newUser.emailAddress} : ${info.response}`);
-      }
-      main().catch(console.error);
     } catch (error) {
       console.trace(
         'Erreur dans la méthode handleSignupForm du userController :',
@@ -319,6 +220,7 @@ const userController = {
       response.status(500).json(error.message);
     }
   },
+
   /**
    * disconnection method
    * @param {string} req 
@@ -409,123 +311,13 @@ const userController = {
       const newUser = new User(updateUserInfo);
       await newUser.update();
 
-      async function main() {
-        const transporter = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 465,
-          secure: true, 
-          auth: {
-            user: process.env.EMAIL, 
-            pass: process.env.PASSWORD_EMAIL, 
-          },
-        });
-
-        const info = await transporter.sendMail({
-          from: 'lesgardiensdelalegende@gmail.com', 
-          to: `${newUser.emailAddress}`, 
-          subject: `Vos modification d'information sur le site des Gardiens de la légende à été pris en compte ! ✔`, 
-          text: `Bonjour ${newUser.firstName} ${newUser.lastName},
-          Vous êtes membre du club de jeux des gardiens de la legendes.
-          Vous avez récemment changé vos informations personnelles dans la configuration de votre compte. 😊 
-          Vos changement ont bien été pris en compte ! ✔️
-          En vous remerciant et en espérant vous revoir bientôt autour d'un jeu ! 🤗
-          Bonne journée.
-          L'administrateur du site Les gardiens de la légende.`, 
-          html: `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
-          integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
-          crossorigin="anonymous" />
-      <style>
-      h3 {
-        font-size: 1.5rem;
-    }
-    body {
-        background-color: rgb(253, 232, 175);
-    }
-    .background {
-        display: flex
-    }
-    .medieval {
-        border-radius: 8px;
-        max-height: 500px;
-        height: 300px;
-        width: 1500px;
-        max-width: 100%;
-    }
-    .montext {
-        padding: 2rem 0 0 2rem;
-    }
-      </style>
-      <body>
-          <div class="background">
-      
-              <a href="http://localhost:8080"> <img class="medieval"
-                      src="https://eapi.pcloud.com/getpubthumb?code=XZlztkZqnIb2V9qFI4z3M5DI9gDBQIu0TfX&linkpassword=undefined&size=870x217&crop=0&type=auto"
-                      alt="medieval"> </a>
-          </div>
-                <div class="montext">
-              <h3>Bonjour <span class="username"> ${newUser.firstName} ${newUser.lastName}, </span> </h3> <br>
-              <p>Vous êtes membre du club de jeux des gardiens de la legendes.</p>
-              <p>Vous avez récemment changé vos informations personnelles dans la configuration de votre compte. 😊 </p>
-              <p> Vos
-                  changement ont bien été pris en compte ! ✔️ </p> <br>
-              <p>En vous remerciant et en espérant vous revoir bientôt autour d'un jeu ! 🤗</p>
-              <p> Bonne journée.</p> <br>
-      
-              <p>L'administrateur du site Les gardiens de la légende.</p> <br>
-              <a href="http://localhost:8080"> Les gardiens de la légendes</a>
-      
-          </div>
-            </body>`, 
-        });
-        console.log("Message sent: %s", info.messageId);
-        console.log(`Email bien envoyé a ${newUser.firstName} ${newUser.lastName} via l'adresse email: ${newUser.emailAddress} : ${info.response}`);
-      }
-      main().catch("Erreur lors de l'envois du mail dans la méthode updateUser", console.error);
+     
       console.log("le newUser in DB => ", newUser);
       res.json(newUser.id, newUser.firstName, newUser.lastName, newUser.pseudo, newUser.avatar);
       console.log(`L'utilisateur avec l'id : ${newUser.id} et le pseudo ${newUser.pseudo}, a bien été modifié.`);
     } catch (error) {
       res.status(500).json(error.message);
       console.log("Erreur dans la modification d'un utilisateur : ", error);
-    }
-  },
-  verifyEmail: async (req, res, err) => {
-    try {
-      const {
-        userId,
-        token
-      } = req.query;
-      console.log("userId =>", userId);
-      console.log("secretCode =>", token)
-      const userInDb = await User.findOne(userId);
-      console.log("userInDb.emailverified =>", userInDb.verifyemail);
-      const decodedToken = await jsonwebtoken.verify(token, jwtSecret, {
-        audience: 'Lesgardiensdelalégende',
-        issuer: `${userInDb.pseudo}`
-      }, function (err, decoded) {
-        if (err) {
-          res.json("la validation de votre email a échoué", err)
-        }
-        return decoded
-      });
-      console.log("decode =>", decodedToken)
-      console.log("userId =>", userId);
-      if (userInDb.verifyemail) {
-        console.log(`Le mail ${userInDb.emailAddress} à déja été authentifié avec succés !`);
-        res.json(`Bonjour ${userInDb.pseudo}, votre email a déja été authentifié !`)
-      } else if (!decodedToken.userId === userInDb.id && decodedToken.iss == userInDb.pseudo) {
-        console.log(`une érreur est apparu =>`, err)
-        res.status(401).json(`la validation de votre email a échoué`);
-      } else {
-        await User.emailverified(userInDb.id);
-        console.log(`Le mail ${userInDb.emailAddress} à été authentifié avec succés !`);
-        res.status(200).json(`Bonjour ${userInDb.pseudo}, votre mail a été authentifié avec succés ! Vous pouvez désormais fermer cette page.`)
-      }
-    } catch (error) {
-      console.trace(
-        'Erreur dans la méthode verifyEmail du userController :',
-        error);
-      res.status(500).json(error.message);
     }
   },
 }

@@ -1,22 +1,7 @@
 import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
+import card from 'src/assets/card.png';
 import './style.css';
-
-const containerStyle = {
-  width: '100%',
-  height: '400px',
-};
-
-const center = {
-  lat: 47.48792579973978,
-  lng: -0.5912258999910721,
-};
-
-const position = {
-  lat: 47.48792579973978,
-  lng: -0.5912258999910721,
-};
 
 function Contact({
   error,
@@ -32,25 +17,11 @@ function Contact({
       }, 60000);
     }
   return (
-    <>
+        <>
      {error && <p className="error">{error}</p>}
      {message && <p className="success">{message}</p>}
       <div className="contact_container">
-        <LoadScript
-          googleMapsApiKey="AIzaSyB4sN2eEQGY4eApvHI7LeUgajNi6HNhoXU"
-        >
-          <GoogleMap
-            id="marker-gdl"
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={15}
-          >
-
-            <Marker
-              position={position}
-            />
-          </GoogleMap>
-        </LoadScript>
+      <div className="card_mjc" style={{ background: `url(${card})` }}></div>
         <div className="contact_infos">
           <br />
           <h2>Pour nous retrouver :</h2>

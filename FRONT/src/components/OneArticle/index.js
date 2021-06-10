@@ -38,7 +38,6 @@ const OneArticle = ({
 }) => {
   const errorsEditArticle= ['errornewTitle','errornewDescription', 'errorEditArticle'];
   const errors = [errornewTitle,errornewDescription, errorEditArticle];
-  console.log('components onearticle errors', errors);
     /**
  * function that is performed once when the page is displayed
  */
@@ -293,7 +292,7 @@ OneArticle.propTypes = {
 OneArticle.defaultProps = {
   article: {},
   newTitle: 'un titre',
-  newDescription: 'un description',
+  newDescription: 'une description',
 };
 
 export default OneArticle;
