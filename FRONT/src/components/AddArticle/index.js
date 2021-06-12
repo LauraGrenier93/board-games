@@ -1,7 +1,8 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-loop-func */
-/* eslint-disable linebreak-style */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -130,6 +131,7 @@ const AddArticle = ({
           <TextAreaDescription
             className="newDescription"
             name="newDescription"
+            type="text"
             placeholder="écrivez votre article"
             onChange={changeFieldArticle}
             value={newDescription}

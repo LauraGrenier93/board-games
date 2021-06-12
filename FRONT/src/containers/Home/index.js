@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import { connect } from 'react-redux';
 import Home from 'src/components/Home';
 import { fetchArticles, initValueNewAndDeleteArticle } from 'src/actions/articles';

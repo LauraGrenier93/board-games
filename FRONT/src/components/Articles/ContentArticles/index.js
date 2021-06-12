@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';

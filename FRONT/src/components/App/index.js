@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable linebreak-style */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {

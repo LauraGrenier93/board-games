@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-shadow */
@@ -203,6 +205,7 @@ const OneArticle = ({
                           <TextAreaDescription
                             className="newDescription"
                             name="newDescription"
+                            type="text"
                             placeholder="écrivez votre article"
                             onChange={changeFieldArticle}
                             value={newDescription}

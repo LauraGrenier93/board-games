@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import React from 'react';
 import { Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -49,8 +50,11 @@ CardGame.propTypes = {
   duration: PropTypes.objectOf(PropTypes.number).isRequired,
   quantity: PropTypes.number.isRequired,
   minPlayer: PropTypes.number.isRequired,
-  maxPlayer: PropTypes.number.isRequired,
+  maxPlayer: PropTypes.number,
   gameCategories: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
+CardGame.defaultProps = {
+  maxPlayer: 0,
+};
 export default CardGame;

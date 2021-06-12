@@ -1,8 +1,16 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import { connect } from 'react-redux';
 import OneEvent from 'src/components/OneEvent';
 import {
-  participation, fetchEvents, idEventSelected, sendUnsubscribe, setFieldValueEvent, sendEditEvent,
+  participation,
+  fetchEvents,
+  idEventSelected,
+  sendUnsubscribe,
+  setFieldValueEvent,
+  sendEditEvent,
+  editNewTitleEvent,
+  editDescriptionEvent,
 } from 'src/actions/events';
 import { setMessage, setError } from 'src/actions/user';
 import { fetchGames } from 'src/actions/games';
@@ -16,7 +24,7 @@ const mapStateToProps = (state) => (
     error: state.user.error,
     message: state.user.message,
     loadingEvents: state.events.loadingEvents,
-    editEvent: state.events.loadingEvents,
+    editEvent: state.events.editEvent,
     errorEvents: state.user.errorEvents,
     errorEditEvent: state.user.errorEditEvent,
     newTitle: state.events.newTitle,
@@ -35,6 +43,8 @@ const mapDispatchToProps = (dispatch) => ({
   changeFieldEvent: (value, name) => dispatch(setFieldValueEvent(value, name)),
   handleEditEvent: () => dispatch(sendEditEvent()),
   handleBlur: (error, name) => dispatch(setError(error, name)),
+  editNewTitle: (title) => dispatch(editNewTitleEvent(title)),
+  editDescription: (description) => dispatch(editDescriptionEvent(description)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OneEvent);

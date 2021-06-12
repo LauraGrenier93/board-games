@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable linebreak-style */
 /* eslint-disable no-empty */
 import {
   FETCH_ARTICLES,
@@ -23,7 +25,6 @@ export default (store) => (next) => async (action) => {
 
   const numberId = parseInt(idUser, 10);
   const newTagIdNumber = parseInt(newTagId, 10);
-
   const urlEditArticle = `/articles/${idArticle}`;
   const urlDeleteArticle = `/articles/${idArticle}`;
 
@@ -73,7 +74,7 @@ export default (store) => (next) => async (action) => {
           store.dispatch(setError('La description de l\'article doit contenir au moins 15 caractères.', 'errorAddArticle'));
         }
         else {
-          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu ajouter l\'articles.', 'errorAddArticle'));
+          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu ajouter l\'article.', 'errorAddArticle'));
         }
       }
       return next(action);
@@ -87,12 +88,13 @@ export default (store) => (next) => async (action) => {
             Authorization: `Bearer ${tokens}`,
           },
         };
-        await axios.patch(urlEditArticle, {
+        const response = await axios.patch(urlEditArticle, {
           title: newTitle,
           description: newDescription,
           authorId: numberId,
           tagId: newTagIdNumber,
         }, options);
+        console.log('middlewares articles response', response);
         store.dispatch(setEditArticle(true));
       }
       catch (error) {
@@ -106,7 +108,7 @@ export default (store) => (next) => async (action) => {
           store.dispatch(setError('La description de l\'article doit contenir au moins 15 caractères.', 'errorEditArticle'));
         }
         else {
-          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu  modifier l\'articles.', 'errorEditArticle'));
+          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu  modifier l\'article.', 'errorEditArticle'));
         }
       }
       return next(action);

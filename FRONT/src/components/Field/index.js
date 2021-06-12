@@ -1,3 +1,6 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable linebreak-style */
+/* eslint-disable import/extensions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
@@ -42,9 +45,11 @@ Field.propTypes = {
   value: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
 };
-
+Field.defaultProps = {
+  placeholder: '',
+};
 export default Field;

@@ -1,6 +1,7 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-shadow */
-/* eslint-disable linebreak-style */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -137,6 +138,7 @@ const Events = ({
                         </div>
                         <TextAreaDescription
                           className="newDescription"
+                          type="texte"
                           name="newDescription"
                           placeholder="écrivez votre évènement"
                           onBlur={handleBlur}

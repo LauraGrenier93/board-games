@@ -22,7 +22,10 @@ const CardEvent = ({
         <Card.Header>{title} pour la date du {eventDate}</Card.Header>
         <Card.Meta>
           <span>{creatorPseudo}</span>
-          <span>mise en ligne le { updateDate || createdDate }</span>
+          {createdDate
+            ? <span> mise en ligne le { createdDate } </span>
+            : <span> mise en ligne le { updateDate } </span>}
+
         </Card.Meta>
         <Card.Description>
           {description}

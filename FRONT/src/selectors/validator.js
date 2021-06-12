@@ -1,5 +1,5 @@
-/* eslint-disable import/prefer-default-export */
 /* eslint-disable linebreak-style */
+/* eslint-disable import/prefer-default-export */
 /**
  * function that checks the first or last name of a field
  * @param {string} name - value of the entered lastname or firstname
@@ -32,7 +32,7 @@ const validationPassword = (password) => {
  * @param {string} email
  */
 const validationEmail = (email) => {
-  const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return regexEmail.test(email);
 };
 

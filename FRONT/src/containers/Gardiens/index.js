@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import { connect } from 'react-redux';
 import Gardiens from 'src/components/Gardiens';
 import { setMessage } from 'src/actions/user';

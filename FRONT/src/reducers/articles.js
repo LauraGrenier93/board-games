@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import {
   SET_ARTICLES,
   SET_FIELD_VALUE_ARTICLE,
@@ -20,7 +21,7 @@ export const initialState = {
       title: '',
       description: '',
       createdDate: '',
-      updateDate: null,
+      updateDate: '',
       authorId: 2,
       authorPseudo: '',
       tagId: 1,

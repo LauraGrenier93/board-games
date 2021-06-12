@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import {
@@ -35,7 +37,11 @@ const OneEvent = ({
   newEventDate,
   newTagId,
   handleBlur,
+  editNewTitle,
+  editDescription,
 }) => {
+  console.log('components OneEvent event.createdDate', event.createdDate);
+  console.log('components OneEvent updateDate.', event.updateDate);
   /**
  * function that is performed once when the page is displayed
  */
@@ -43,6 +49,12 @@ const OneEvent = ({
     fetchArticles();
     fetchEvents();
     fetchGames();
+    if (!newTitle) {
+      editNewTitle(event.title);
+    }
+    if (!newDescription) {
+      editDescription(event.description);
+    }
   }, [!event]);
   /**
  * function that starts a timer to initialise the message after 20 seconds
@@ -129,6 +141,7 @@ const OneEvent = ({
                           type="texte"
                           placeholder="titre de votre évènement"
                           onChange={changeFieldEvent}
+                          onBlur={handleBlur}
                           value={newTitle}
                         />
                         <Field
@@ -136,6 +149,7 @@ const OneEvent = ({
                           type="datetime-local"
                           placeholder="date de l'évènement"
                           value={newEventDate}
+                          onBlur={handleBlur}
                           onChange={changeFieldEvent}
                         />
                         <div className="button-radio">
@@ -145,6 +159,7 @@ const OneEvent = ({
                             type="radio"
                             id="new"
                             value="1"
+                            onBlur={handleBlur}
                             onChange={changeFieldEvent}
                           />
                           <label htmlFor="new">Soirée jeux</label>
@@ -154,15 +169,18 @@ const OneEvent = ({
                             type="radio"
                             id="murderParty"
                             value="2"
+                            onBlur={handleBlur}
                             onChange={changeFieldEvent}
                           />
                           <label htmlFor="murderParty">Murder Partie</label>
                         </div>
                         <TextAreaDescription
                           className="newDescription"
+                          type="text"
                           name="newDescription"
                           placeholder="écrivez votre évènement"
                           onChange={changeFieldEvent}
+                          onBlur={handleBlur}
                           value={newDescription}
                         />
 
@@ -186,13 +204,13 @@ const OneEvent = ({
                           <Card.Content textAlign="center">
                             <Card.Header>{ nameTagIdEvent(newTagId)}</Card.Header>
                             <Card.Header>
-                              {event.title} pour la date du {event.eventDate}
+                              {newTitle} pour la date du {newEventDate}
                             </Card.Header>
                             <Card.Meta>
                               <span>{event.creatorPseudo}</span>
-                              <span>
-                                mise en ligne le { event.updateDate || event.createdDate }
-                              </span>
+                              {event.createdDate
+                                ? <span> mise en ligne le { event.createdDate } </span>
+                                : <span> mise en ligne le { event.updateDate } </span>}
                             </Card.Meta>
                             <Card.Description>
                               {newDescription}
@@ -207,12 +225,15 @@ const OneEvent = ({
                         <Card className="cardEvent" style={{ backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
                           <Card.Content textAlign="center">
                             <Card.Header>{ event.eventTag}</Card.Header>
-                            <Card.Header>{newTitle} pour la date du {event.eventDate}</Card.Header>
+                            <Card.Header>
+                              {event.title} pour la date du {event.eventDate}
+                            </Card.Header>
                             <Card.Meta>
                               <span>{event.creatorPseudo}</span>
-                              <span>
-                                mise en ligne le { event.updateDate || event.createdDate }
-                              </span>
+                              {event.createdDate
+                                ? <span> mise en ligne le { event.createdDate } </span>
+                                : <span> mise en ligne le { event.updateDate } </span>}
+
                             </Card.Meta>
                             <Card.Description>
                               {event.description}
@@ -311,6 +332,8 @@ OneEvent.propTypes = {
   idEventSelected: PropTypes.func.isRequired,
   unsubscribe: PropTypes.func.isRequired,
   setMessage: PropTypes.func.isRequired,
+  editNewTitle: PropTypes.func.isRequired,
+  editDescription: PropTypes.func.isRequired,
   toParticipate: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   loadingEvents: PropTypes.bool.isRequired,

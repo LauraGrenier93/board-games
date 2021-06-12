@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import { connect } from 'react-redux';
 import AddArticle from 'src/components/AddArticle';
 import { sendAddArticle, setFieldValueArticle } from 'src/actions/articles';

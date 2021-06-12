@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import {
   Grid,
@@ -73,7 +75,7 @@ const Header = ({ isLogged, sendDisconnect }) => {
           )}
         </div>
       </Grid.Row>
-    </Grid >
+    </Grid>
   );
 };
 Header.propTypes = {

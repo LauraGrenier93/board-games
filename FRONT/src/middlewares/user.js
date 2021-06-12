@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-empty */
 import {
   SEND_SIGN_IN_FORM,

@@ -1,3 +1,6 @@
+/* eslint-disable linebreak-style */
+// eslint-disable-next-line linebreak-style
+/* eslint-disable import/no-unresolved */
 import { connect } from 'react-redux';
 import SignInForm from 'src/components/SignInForm';
 import {

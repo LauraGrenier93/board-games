@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable linebreak-style */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Field from 'src/components/Field';
@@ -72,6 +72,7 @@ const LoginForm = ({
               <div className="input">
                 <Field
                   name="pseudo"
+                  type="text"
                   className="input_field"
                   placeholder="Votre pseudo"
                   onChange={changeField}

@@ -1,8 +1,10 @@
+/* eslint-disable linebreak-style */
 // Types of action
 export const FETCH_EVENTS = 'FETCH_Events';
 export const PARTICIPATION = 'PARTICIPATION';
 export const ID_EVENT_SELECTED = 'ID_EVENT_SELECTED';
 export const SEND_ADD_EVENT = 'SEND_ADD_EVENT';
+export const SET_EDIT_EVENT = 'SET_EDIT_EVENT';
 export const SEND_EDIT_EVENT = 'SEND_EDIT_EVENT';
 export const SEND_UNSUBSCRIBE = 'SEND_UNSUBSCRIBE';
 export const SET_EVENTS = 'SET_Events';
@@ -10,6 +12,8 @@ export const SET_FIELD_VALUE_EVENT = 'SET_FIELD_VALUE_EVENT';
 export const SET_ADD_NEW_EVENT = 'SET_ADD_NEW_EVENT';
 export const SET_PARTICIPATE = 'SET_PARTICIPATE';
 export const INIT_VALUE_ADD_NEW_EVENT = 'INIT_VALUE_ADD_NEW_EVENT';
+export const EDIT_NEW_TITLE_EVENT = 'EDIT_NEW_TITLE_EVENT';
+export const EDIT_NEW_DESCRIPTION_EVENT = 'EDIT_NEW_DESCRIPTION_EVENT';
 
 // creation of an action
 
@@ -102,4 +106,29 @@ export const initValueAddNewEvent = () => ({
  */
 export const sendEditEvent = () => ({
   type: SEND_EDIT_EVENT,
+});
+/**
+ *  action which, when an event is modified, will trigger its display
+ */
+export const setEditEvent = (boolean) => ({
+  type: SET_EDIT_EVENT,
+  boolean,
+});
+
+/**
+ *  action that displays the title in preview if it has not been modified
+ * @param {string} title
+ */
+export const editNewTitleEvent = (title) => ({
+  type: EDIT_NEW_TITLE_EVENT,
+  title,
+});
+
+/**
+ *  action that displays the description in preview if it has not been modified
+ * @param {string} description
+ */
+export const editDescriptionEvent = (description) => ({
+  type: EDIT_NEW_DESCRIPTION_EVENT,
+  description,
 });

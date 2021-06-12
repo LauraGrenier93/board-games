@@ -1,13 +1,16 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-empty */
 import {
   SEND_UNSUBSCRIBE,
   SEND_ADD_EVENT,
+  SEND_EDIT_EVENT,
   FETCH_EVENTS,
   PARTICIPATION,
   setEvents,
   setAddNewEvent,
   setParticipate,
+  setEditEvent,
 } from 'src/actions/events';
 import { setError, setLoading } from 'src/actions/user';
 import axios from 'src/api';
@@ -20,6 +23,7 @@ export default (store) => (next) => async (action) => {
     },
   } = store.getState();
   const numberId = parseInt(idUser, 10);
+  const urlEditEvent = `/evenements/${idEvent}`;
   switch (action.type) {
     case FETCH_EVENTS: {
       try {
@@ -91,8 +95,44 @@ export default (store) => (next) => async (action) => {
           store.dispatch(setError('Il manque la catégorie de l\'évènement.', 'errorAddEvent'));
         }
         else {
-          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu ajouter l\'évènements.', 'errorAddEvent'));
+          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu ajouter l\'évènement.', 'errorAddEvent'));
         }
+      }
+      return next(action);
+    }
+    case SEND_EDIT_EVENT: {
+      try {
+        const tokens = localStorage.getItem('tokens');
+        const options = {
+          mode: 'cors',
+          headers: {
+            Authorization: `Bearer ${tokens}`,
+          },
+        };
+        const response = await axios.patch(urlEditEvent, {
+          title: newTitle,
+          description: newDescription,
+          creatorId: numberId,
+          tagId: newTagId,
+        }, options);
+        console.log('middlewares event respones', response);
+        store.dispatch(setEditEvent(true));
+      }
+      catch (error) {
+        if (error.response.data === '"title" is not allowed to be empty') {
+          store.dispatch(setError('Le champs titre de l\'évènement ne peut être vide. Votre évènement n\'a pas pu être enregistré', 'errorEditEvent'));
+        }
+        else if (error.response.data === '"description" is not allowed to be empty') {
+          store.dispatch(setError('Le champs description de l\'évènement ne peut être vide.', 'errorEditEvent'));
+        }
+        else if (error.response.data === '"description" length must be at least 15 characters long') {
+          store.dispatch(setError('La description de l\'évènement doit contenir au moins 15 caractères.', 'errorEditEvent'));
+        }
+        else {
+          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu  modifier l\'évènement.', 'errorEditEvent'));
+        }
+        console.log('error', error);
+        console.log('error.response', error.response);
       }
       return next(action);
     }

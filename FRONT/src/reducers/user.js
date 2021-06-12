@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import {
   SET_FIELD_VALUE,
   LOGIN,

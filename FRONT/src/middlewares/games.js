@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import { FETCH_GAMES, setGames } from 'src/actions/games';
 import { setError, setLoading } from 'src/actions/user';
 import axios from 'src/api';

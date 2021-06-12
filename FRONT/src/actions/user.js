@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // Types of action
 export const SET_FIELD_VALUE = 'SET_FIELD_VALUE';
 export const SEND_LOGIN = 'SEND_LOGIN';

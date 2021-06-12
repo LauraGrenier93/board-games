@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import { SET_GAMES } from 'src/actions/games';
 import { SET_LOADING } from 'src/actions/user';
 

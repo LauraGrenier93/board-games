@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import 'jsdom-global/register';
 import React from 'react';
 import { expect } from 'chai';

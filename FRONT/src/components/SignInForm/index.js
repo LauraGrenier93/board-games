@@ -1,5 +1,6 @@
-/* eslint-disable no-restricted-syntax */
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-restricted-syntax */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Field from 'src/components/Field';
@@ -73,6 +74,7 @@ const SignInForm = ({
           <h1> Inscription </h1>
           <Field
             name="firstName"
+            type="text"
             placeholder="Prénom"
             onChange={changeField}
             value={firstName}
@@ -80,6 +82,7 @@ const SignInForm = ({
           />
           <Field
             name="lastName"
+            type="text"
             placeholder="Nom"
             onChange={changeField}
             value={lastName}
@@ -88,6 +91,7 @@ const SignInForm = ({
           <div className="pseudo">
             <Field
               name="pseudo"
+              type="text"
               placeholder="Pseudo"
               onChange={changeField}
               value={pseudo}
@@ -99,6 +103,7 @@ const SignInForm = ({
           <div className="pseudo">
             <Field
               name="emailAddress"
+              type="email"
               placeholder="Adresse email"
               onChange={changeField}
               value={emailAddress}
