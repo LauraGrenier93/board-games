@@ -8,8 +8,8 @@ import {
   logout,
   setMessage,
   setError,
-} from 'src/actions/user'; 
-import axios from 'src/api'; 
+} from 'src/actions/user';
+import axios from 'src/api';
 
 export default (store) => (next) => async (action) => {
   const {
@@ -21,9 +21,19 @@ export default (store) => (next) => async (action) => {
     case SEND_LOGIN: {
       try {
         const response = await axios.post('connexion', { pseudo, password });
-        response.config.data= { "pseudo": "", "password":"" };
-        localStorage.setItem('tokens', response.data.token); 
-        store.dispatch(login( response.data.email, response.data.firstname, response.data.id, response.data.lastname, response.data.logged, response.data.pseudo, response.data.role));
+        response.config.data = { pseudo: '', password: '' };
+        localStorage.setItem('tokens', response.data.token);
+        store.dispatch(
+          login(
+            response.data.email,
+            response.data.firstname,
+            response.data.id,
+            response.data.lastname,
+            response.data.logged,
+            response.data.pseudo,
+            response.data.role,
+          ),
+        );
         store.dispatch(setMessage('Vous êtes connecté', 'messageHome'));
       }
       catch (error) {
@@ -33,7 +43,7 @@ export default (store) => (next) => async (action) => {
     }
     case SEND_SIGN_IN_FORM: {
       try {
-       const response = await axios.post('inscription', {
+        const response = await axios.post('inscription', {
           pseudo, firstName, lastName, emailAddress, password, passwordConfirm,
         });
         store.dispatch(setMessage(response.data.message, 'messageLogin'));
@@ -56,7 +66,7 @@ export default (store) => (next) => async (action) => {
       try {
         const tokens = localStorage.getItem('tokens');
         const options = {
-          mode: 'cors', 
+          mode: 'cors',
           headers: {
             Authorization: `Bearer ${tokens}`,
           },

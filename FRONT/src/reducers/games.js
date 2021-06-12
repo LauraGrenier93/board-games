@@ -1,5 +1,6 @@
 import { SET_GAMES } from 'src/actions/games';
-import {  SET_LOADING} from 'src/actions/user';
+import { SET_LOADING } from 'src/actions/user';
+
 export const initialState = {
   games:
     [
@@ -25,7 +26,7 @@ export const initialState = {
         preview: '',
       },
     ],
-    loadingGames: true,
+  loadingGames: true,
 };
 
 export default (state = initialState, action = {}) => {
@@ -35,11 +36,11 @@ export default (state = initialState, action = {}) => {
         ...state,
         games: action.games,
       };
-      case SET_LOADING:
-        return {
-          ...state,
-          [action.name]: action.bool, 
-        }
+    case SET_LOADING:
+      return {
+        ...state,
+        [action.name]: action.boolean,
+      };
     default:
       return state;
   }

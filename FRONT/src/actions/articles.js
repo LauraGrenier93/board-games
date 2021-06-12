@@ -24,7 +24,7 @@ export const fetchArticles = () => ({
 
 /**
  *  action that allows the display of articles
- * @param {object} articles 
+ * @param {object} articles
  */
 export const setArticles = (articles) => ({
   type: SET_ARTICLES,
@@ -35,17 +35,18 @@ export const setArticles = (articles) => ({
  *  action that sends a new article to the database
  */
 export const sendAddArticle = () => ({
-    type: SEND_ADD_ARTICLE,
-  });
+  type: SEND_ADD_ARTICLE,
+});
 
 /**
- *  action that changes the value of the boolean in the store to display all items plus the one created
- * @param {bool} bool 
- * @returns 
+ *  action that changes the value of the boolean
+ *  in the store to display all items plus the one created
+ * @param {bool} boolean
+ * @returns
  */
-export const setAddNewArticle = (bool) => ({
+export const setAddNewArticle = (boolean) => ({
   type: SET_ADD_NEW_ARTICLE,
-  bool
+  boolean,
 });
 
 /**
@@ -62,28 +63,28 @@ export const setFieldValueArticle = (value, name) => ({
 /**
  *  action that indicates and stores the id number of the event to modify it
  */
- export const idArticleSelected = (id) => ({
+export const idArticleSelected = (id) => ({
   type: ID_ARTICLE_SELECTED,
   id,
 });
 /**
  *  action that sends an article modification to the database
  */
- export const sendEditArticle = () => ({
+export const sendEditArticle = () => ({
   type: SEND_EDIT_ARTICLE,
 });
 
 /**
  *  action which, when an article is modified, will trigger its display
  */
-export const setEditArticle = (bool) => ({
+export const setEditArticle = (boolean) => ({
   type: SET_EDIT_ARTICLE,
-  bool,
+  boolean,
 });
 
 /**
  *  action that displays the title in preview if it has not been modified
- * @param {string} title 
+ * @param {string} title
  */
 export const editNewTitle = (title) => ({
   type: EDIT_NEW_TITLE,
@@ -92,7 +93,7 @@ export const editNewTitle = (title) => ({
 
 /**
  *  action that displays the description in preview if it has not been modified
- * @param {string} description 
+ * @param {string} description
  */
 export const editDescription = (description) => ({
   type: EDIT_NEW_DESCRIPTION,
@@ -102,20 +103,20 @@ export const editDescription = (description) => ({
 /**
  * action to delete an item
  */
- export const sendDeleteArticle = () => ({
+export const sendDeleteArticle = () => ({
   type: SEND_DELETE_ARTICLE,
 });
 
 /**
  *  action which, when an article is modified, will trigger its display
  */
- export const setDeleteArticle = (bool) => ({
+export const setDeleteArticle = (boolean) => ({
   type: SET_DELETE_ARTICLE,
-  bool,
+  boolean,
 });
 /**
  * Action to register or unregister for an event
  */
- export const initValueNewAndDeleteArticle = () => ({
+export const initValueNewAndDeleteArticle = () => ({
   type: INIT_VALUE_NEW_AND_DELETE_ARTICLE,
 });

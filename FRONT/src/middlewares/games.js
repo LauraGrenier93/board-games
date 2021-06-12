@@ -1,5 +1,6 @@
+/* eslint-disable linebreak-style */
 import { FETCH_GAMES, setGames } from 'src/actions/games';
-import { setError,setLoading } from 'src/actions/user'; 
+import { setError, setLoading } from 'src/actions/user';
 import axios from 'src/api';
 
 export default (store) => (next) => async (action) => {
@@ -12,10 +13,10 @@ export default (store) => (next) => async (action) => {
       catch (error) {
         store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu afficher les jeux.', 'errorGames'));
       }
-      finally{
+      finally {
         store.dispatch(setLoading(false, 'loadingGames'));
-        return next(action);
       }
+      return next(action);
     }
     default:
       return next(action);

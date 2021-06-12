@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({
   isLogged: state.user.logged,
   errorpseudo: state.user.errorpseudo,
   errorpassword: state.user.errorpassword,
-  errorSendLogin:state.user.errorSendLogin,
+  errorSendLogin: state.user.errorSendLogin,
   messageLogin: state.user.messageLogin,
 
 });
@@ -23,6 +23,6 @@ const mapDispatchToProps = (dispatch) => ({
   handleLogin: () => dispatch(sendLogin()),
   handleLogout: () => dispatch(logout()),
   handleBlur: (error, name) => dispatch(setError(error, name)),
-  setMessage:(message, name) => dispatch(setMessage(message, name)),
+  setMessage: (message, name) => dispatch(setMessage(message, name)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

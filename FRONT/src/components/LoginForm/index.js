@@ -1,3 +1,6 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable linebreak-style */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Field from 'src/components/Field';
@@ -17,38 +20,39 @@ const LoginForm = ({
   handleBlur,
   setMessage,
 }) => {
-  const ErrorNames = ['errorpseudo','errorpassword', 'errorSendLogin'];
-    /**
+  const ErrorNames = ['errorpseudo', 'errorpassword', 'errorSendLogin'];
+  /**
    * function that is activated when the form is submitted
-   * @param {Event} evt 
+   * @param {Event} evt
    */
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if(pseudo && password ){
-    handleLogin();
-  } else {
-    handleBlur('Il faut que les champs pseudo et password soient remplis.','errorSendLogin');
-  }
+    if (pseudo && password) {
+      handleLogin();
+    }
+    else {
+      handleBlur('Il faut que les champs pseudo et password soient remplis.', 'errorSendLogin');
+    }
   };
 
-   /**
+  /**
    * function that starts a timer to initialise the success message or after 20 seconds
    */
-       if(messageLogin){
-        setTimeout(() => {
-          setMessage('', messageLogin);
-        }, 20000);
-      }
-         /**
+  if (messageLogin) {
+    setTimeout(() => {
+      setMessage('', messageLogin);
+    }, 20000);
+  }
+  /**
    * function that starts a timer to initialise the error message or after 20 seconds
    */
-          if(ErrorNames){
-            for(const error of ErrorNames){
-           setTimeout(() => {
-             handleBlur('', error);
-           }, 20000);
-         }
-         }
+  if (ErrorNames) {
+    for (const error of ErrorNames) {
+      setTimeout(() => {
+        handleBlur('', error);
+      }, 20000);
+    }
+  }
 
   return (
     <div className="login-form">
@@ -104,17 +108,17 @@ const LoginForm = ({
   );
 };
 LoginForm.propTypes = {
-  pseudo: PropTypes.string,
+  pseudo: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func,
-  errorpseudo: PropTypes.string,
-  errorpassword: PropTypes.string,
-  errorSendLogin: PropTypes.string,
-  messageLogin: PropTypes.string,
-  isLogged: PropTypes.bool,
-  setMessage: PropTypes.func,
+  handleBlur: PropTypes.func.isRequired,
+  errorpseudo: PropTypes.string.isRequired,
+  errorpassword: PropTypes.string.isRequired,
+  errorSendLogin: PropTypes.string.isRequired,
+  messageLogin: PropTypes.string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  setMessage: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

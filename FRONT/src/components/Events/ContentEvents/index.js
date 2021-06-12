@@ -15,9 +15,9 @@ return (
 ContentEvents.propTypes = {
   elements: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.number,
     }),
-  ),
+  ).isRequired,
 };
 
 export default ContentEvents;

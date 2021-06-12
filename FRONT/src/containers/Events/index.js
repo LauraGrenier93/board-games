@@ -1,7 +1,11 @@
-import { connect } from 'react-redux'; 
-import Events from 'src/components/Events'; 
-import { fetchEvents, sendAddEvent, setFieldValueEvent, initValueAddNewEvent } from 'src/actions/events'; 
-import { setMessage,setError } from 'src/actions/user';
+/* eslint-disable linebreak-style */
+import { connect } from 'react-redux';
+import Events from 'src/components/Events';
+import {
+  fetchEvents, sendAddEvent, setFieldValueEvent, initValueAddNewEvent,
+} from 'src/actions/events';
+import { setMessage, setError } from 'src/actions/user';
+
 const mapStateToProps = (state) => (
   {
     events: state.events.events,
@@ -18,7 +22,6 @@ const mapStateToProps = (state) => (
     errorAddEvent: state.user.errorAddEvent,
     message: state.user.message,
     loadingEvents: state.events.loadingEvents,
-    errorEvents:state.user.errorEvents,
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -26,7 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeFieldEvent: (value, name) => dispatch(setFieldValueEvent(value, name)),
   handleAddEvent: () => dispatch(sendAddEvent()),
   initValueAddNewEvent: () => dispatch(initValueAddNewEvent()),
-  setMessage:(message, name)=> dispatch(setMessage(message, name)),
+  setMessage: (message, name) => dispatch(setMessage(message, name)),
   handleBlur: (error, name) => dispatch(setError(error, name)),
 });
 

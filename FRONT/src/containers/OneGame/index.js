@@ -1,19 +1,19 @@
 import { connect } from 'react-redux';
 import OneGame from 'src/components/OneGame';
-import { setMessage } from 'src/actions/user'; 
+import { setMessage } from 'src/actions/user';
 import { fetchGames } from 'src/actions/games';
 import { fetchEvents } from 'src/actions/events';
 import { fetchArticles } from 'src/actions/articles';
 
 const mapStateToProps = (state) => ({
-    error: state.user.error,
-    message: state.user.message,
-    loadingGames: state.games.loadingGames,
-    errorGames:state.user.errorGames,
-  });
+  error: state.user.error,
+  message: state.user.message,
+  loadingGames: state.games.loadingGames,
+  errorGames: state.user.errorGames,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  setMessage:(message, name)=> dispatch(setMessage(message, name)),
+  setMessage: (message, name) => dispatch(setMessage(message, name)),
   fetchArticles: () => dispatch(fetchArticles()),
   fetchGames: () => dispatch(fetchGames()),
   fetchEvents: () => dispatch(fetchEvents()),

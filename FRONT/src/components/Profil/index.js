@@ -6,24 +6,24 @@ import {
 import './styles.css';
 
 const Profil = ({
-  pseudo, firstName, lastName, emailAddress, role,  error,
+  pseudo, firstName, lastName, emailAddress, role, error,
 }) => (
   <>
-  {error && <p className="error">{error}</p>}
-  <div>
-    <Card className="profil">
-      <Card.Content>
-        <Card.Header>Profil</Card.Header>
-        <Card.Meta>
-          <p className="profil__info"><span className="info">Votre pseudo:</span><span> {pseudo}</span></p>
-          <p className="profil__info"><span className="info">Votre prénom:</span><span> {firstName}</span></p>
-          <p className="profil__info"><span className="info">Votre nom:</span><span> {lastName}</span></p>
-          <p className="profil__info"><span className="info">Votre adresse e-mail:</span><span>{emailAddress}</span></p>
-          <p className="profil__info"><span className="info">Votre role:</span><span>{role}</span></p>
-        </Card.Meta>
-      </Card.Content>
-    </Card>
-  </div>
+    {error && <p className="error">{error}</p>}
+    <div>
+      <Card className="profil">
+        <Card.Content>
+          <Card.Header>Profil</Card.Header>
+          <Card.Meta>
+            <p className="profil__info"><span className="info">Votre pseudo:</span><span> {pseudo}</span></p>
+            <p className="profil__info"><span className="info">Votre prénom:</span><span> {firstName}</span></p>
+            <p className="profil__info"><span className="info">Votre nom:</span><span> {lastName}</span></p>
+            <p className="profil__info"><span className="info">Votre adresse e-mail:</span><span>{emailAddress}</span></p>
+            <p className="profil__info"><span className="info">Votre role:</span><span>{role}</span></p>
+          </Card.Meta>
+        </Card.Content>
+      </Card>
+    </div>
   </>
 );
 Profil.propTypes = {
@@ -32,6 +32,7 @@ Profil.propTypes = {
   lastName: PropTypes.string.isRequired,
   emailAddress: PropTypes.string.isRequired,
   role: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired,
 };
 
 export default Profil;

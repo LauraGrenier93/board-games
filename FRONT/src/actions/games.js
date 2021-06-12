@@ -2,7 +2,7 @@
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const SET_GAMES = 'SET_GAMES';
 
-//creation of an action
+// creation of an action
 /**
  * action that will request the games from the database
  */
@@ -12,8 +12,8 @@ export const fetchGames = () => ({
 
 /**
  * action that displays the list of board games
- * @param {object} games 
- * @returns 
+ * @param {object} games
+ * @returns
  */
 export const setGames = (games) => ({
   type: SET_GAMES,

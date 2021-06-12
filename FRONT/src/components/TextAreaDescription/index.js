@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,12 +17,12 @@ const TextAreaDescription = ({
   const handleChange = (evt) => {
     onChange(evt.target.value, name);
   };
-  const handleBlur = (evt) => {
+  const handleBlur = () => {
     // console.log('components TextAreaDescription evt.target', evt.target.value);
     // console.log('components TextAreaDescription value', value);
     const nameInputFr = "description de l'article";
     const message = validationForm(value, name, nameInputFr);
-    onBlur(message, 'error'+name);
+    onBlur(message, `error${name}`);
   };
 
   const inputId = `field-${name}`;
@@ -48,12 +49,12 @@ const TextAreaDescription = ({
 };
 
 TextAreaDescription.propTypes = {
-  value: PropTypes.string,
-  type: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
+  onBlur: PropTypes.func.isRequired,
 };
 
 export default TextAreaDescription;

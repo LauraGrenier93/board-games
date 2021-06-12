@@ -11,17 +11,16 @@ export const SET_ADD_NEW_EVENT = 'SET_ADD_NEW_EVENT';
 export const SET_PARTICIPATE = 'SET_PARTICIPATE';
 export const INIT_VALUE_ADD_NEW_EVENT = 'INIT_VALUE_ADD_NEW_EVENT';
 
-
-
-//creation of an action
+// creation of an action
 
 /**
- * Action that changes the value of the boolean in the store to display all events plus the one created
- * @param {bool} bool 
+ * Action that changes the value of the boolean
+ * in the store to display all events plus the one created
+ * @param {bool} boolean
  */
-export const setAddNewEvent = (bool) => ({
+export const setAddNewEvent = (boolean) => ({
   type: SET_ADD_NEW_EVENT,
-  bool,
+  boolean,
 });
 
 /**
@@ -41,15 +40,16 @@ export const setEvents = (events) => ({
 });
 
 /**
- * action that transmits the addition of a participant to an event 
+ * action that transmits the addition of a participant to an event
  */
 export const participation = () => ({
   type: PARTICIPATION,
 });
 
 /**
- * action that indicates and stores the id number of the event that a participant wants to register for
- * @param {string} id 
+ * action that indicates and stores the id number of the event
+ * that a participant wants to register for
+ * @param {string} id
  */
 export const idEventSelected = (id) => ({
   type: ID_EVENT_SELECTED,
@@ -59,11 +59,10 @@ export const idEventSelected = (id) => ({
 /**
  * action that sends a new event to the database
  */
-export const sendAddEvent = () => {
-  return({
+export const sendAddEvent = () => ({
   type: SEND_ADD_EVENT,
 });
-}
+
 /**
  * Action to update the value of a field in the store
  * @param {String} value
@@ -84,23 +83,23 @@ export const sendUnsubscribe = () => ({
 
 /**
  * Action to register or unregister for an event
- * @param {bool} bool
+ * @param {bool} boolean
  */
-export const setParticipate = (bool) => ({
+export const setParticipate = (boolean) => ({
   type: SET_PARTICIPATE,
-  bool,
+  boolean,
 });
 
 /**
  * Action to register or unregister for an event
  */
- export const initValueAddNewEvent = () => ({
+export const initValueAddNewEvent = () => ({
   type: INIT_VALUE_ADD_NEW_EVENT,
 });
 
 /**
  *  action that sends an event modification to the database
  */
- export const sendEditEvent = () => ({
+export const sendEditEvent = () => ({
   type: SEND_EDIT_EVENT,
 });

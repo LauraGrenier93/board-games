@@ -8,20 +8,20 @@ function Contact({
   message,
   setMessage,
 }) {
-    /**
+  /**
    * function that starts a timer to initialise the message after 20 seconds
    */
-     if(message){
-      setTimeout(() => {
-        setMessage('', 'message')
-      }, 60000);
-    }
+  if (message) {
+    setTimeout(() => {
+      setMessage('', 'message');
+    }, 60000);
+  }
   return (
-        <>
-     {error && <p className="error">{error}</p>}
-     {message && <p className="success">{message}</p>}
+    <>
+      {error && <p className="error">{error}</p>}
+      {message && <p className="success">{message}</p>}
       <div className="contact_container">
-      <div className="card_mjc" style={{ background: `url(${card})` }}></div>
+        <div className="card_mjc" style={{ background: `url(${card})` }} />
         <div className="contact_infos">
           <br />
           <h2>Pour nous retrouver :</h2>
@@ -57,4 +57,4 @@ Contact.propTypes = {
   message: PropTypes.string.isRequired,
   setMessage: PropTypes.func.isRequired,
 };
-export default(Contact);
+export default (Contact);

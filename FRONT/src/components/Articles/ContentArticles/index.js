@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card } from 'semantic-ui-react'; 
-import PropTypes from 'prop-types'; 
-import CardArticle from 'src/components/Articles/CardArticle'; 
+import { Card } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import CardArticle from 'src/components/Articles/CardArticle';
 
 const ContentArticles = ({ elements }) => (
   <section className="content">
@@ -14,10 +14,9 @@ const ContentArticles = ({ elements }) => (
 ContentArticles.propTypes = {
   elements: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.number,
     }),
-  ),
+  ).isRequired,
 };
-
 
 export default ContentArticles;

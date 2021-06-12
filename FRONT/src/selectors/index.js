@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /**
  * function that searches for the id in the received array
  * @param {Array} array
@@ -10,7 +11,6 @@ export const findIdBySlug = (array, id) => array.find((item) => item.id == id);
  * function that selects 2 ids at random and returns the received array data
  * @param {object} array
  */
-
 export const randomArray = (array) => {
   const newArray = [];
   if (array[0].id !== 0) {
@@ -38,7 +38,7 @@ export const getHighestId = (array) => {
 
 /**
  * function that selects the max id from the table and returns the associated data
- * @param {array} array 
+ * @param {array} array
  * @returns array
  */
 export const lastArray = (array) => {
@@ -53,7 +53,7 @@ export const lastArray = (array) => {
  * function which gives the label of the article
  * @param {string} TagId of article
  */
- export const nameTagIdArticle = (tagId) => {
+export const nameTagIdArticle = (tagId) => {
   let tag = '';
   if (tagId === '1') {
     tag = 'News';
@@ -71,7 +71,7 @@ export const lastArray = (array) => {
  * function which gives the label of the article
  * @param {string} TagId of event
  */
- export const nameTagIdEvent = (tagId) => {
+export const nameTagIdEvent = (tagId) => {
   let tag = '';
   if (tagId === '1') {
     tag = 'Soirée jeux';

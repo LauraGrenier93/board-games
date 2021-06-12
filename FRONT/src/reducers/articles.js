@@ -12,6 +12,7 @@ import {
 import {
   SET_LOADING,
 } from 'src/actions/user';
+
 export const initialState = {
   articles: [
     {
@@ -42,7 +43,7 @@ export default (state = initialState, action = {}) => {
   switch (action.type) {
     case SET_ARTICLES:
       return {
-        ...state, 
+        ...state,
         articles: action.articles,
       };
     case SET_FIELD_VALUE_ARTICLE:
@@ -53,50 +54,50 @@ export default (state = initialState, action = {}) => {
     case SET_ADD_NEW_ARTICLE:
       return {
         ...state,
-        newArticle: action.bool,
+        newArticle: action.boolean,
       };
-      case ID_ARTICLE_SELECTED:
-        return {
-          ...state,
-          idArticle: action.id,
-  
-        };
-      case SET_EDIT_ARTICLE:
-        return {
-          ...state,
-          editArticle: action.bool,
-        };
-      case EDIT_NEW_DESCRIPTION:
-        return {
-          ...state,
-          newDescription: action.description,
-        };
-      case EDIT_NEW_TITLE:
-        return {
-          ...state,
-          newTitle: action.title,
-        };
-        case SET_DELETE_ARTICLE:
-          return {
-            ...state,
-            deleteArticle: action.bool,
-          };
-        case INIT_VALUE_NEW_AND_DELETE_ARTICLE:
-          return {
-            ...state,
-            deleteArticle: false,
-            newArticle: false,
-            editArticle: false,
-            newTitle: '',
-            newDescription: '',
-            newTagId: "1",
-            newArticleDate: '',
-          }
-          case SET_LOADING:
-            return {
-              ...state,
-              [action.name]: action.bool, 
-            }
+    case ID_ARTICLE_SELECTED:
+      return {
+        ...state,
+        idArticle: action.id,
+
+      };
+    case SET_EDIT_ARTICLE:
+      return {
+        ...state,
+        editArticle: action.boolean,
+      };
+    case EDIT_NEW_DESCRIPTION:
+      return {
+        ...state,
+        newDescription: action.description,
+      };
+    case EDIT_NEW_TITLE:
+      return {
+        ...state,
+        newTitle: action.title,
+      };
+    case SET_DELETE_ARTICLE:
+      return {
+        ...state,
+        deleteArticle: action.boolean,
+      };
+    case INIT_VALUE_NEW_AND_DELETE_ARTICLE:
+      return {
+        ...state,
+        deleteArticle: false,
+        newArticle: false,
+        editArticle: false,
+        newTitle: '',
+        newDescription: '',
+        newTagId: '1',
+        newArticleDate: '',
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        [action.name]: action.boolean,
+      };
     default:
       return state;
   }

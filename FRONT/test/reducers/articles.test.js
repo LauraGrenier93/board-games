@@ -1,6 +1,7 @@
+/* eslint-disable linebreak-style */
 import { expect } from 'chai';
-import articlesReducer, {initialState} from 'src/reducers/articles';
-import {setArticles, setFieldValueArticle, setAddNewArticle} from 'src/actions/articles'
+import articlesReducer, { initialState } from 'src/reducers/articles';
+import { setArticles, setFieldValueArticle, setAddNewArticle } from 'src/actions/articles';
 
 describe('Test describe', () => {
   it('must true return true', () => {
@@ -11,27 +12,25 @@ describe('Test describe', () => {
 /**
  * function that checks the structure
  */
-describe('reducer for articles', ()=>{
-
-  describe('structure',()=>{
-    it('must be a function', ()=>{
+describe('reducer for articles', () => {
+  describe('structure', () => {
+    it('must be a function', () => {
       expect(articlesReducer).to.a('function');
-    })
-      
-    it ('check initial state', ()=>{
+    });
+
+    it('check initial state', () => {
       expect(initialState).to.be.an('object');
-      expect(articlesReducer()).to.be.equal(initialState)
-    })
-  })
-})
+      expect(articlesReducer()).to.be.equal(initialState);
+    });
+  });
+});
 
 /**
  * function that tests the actions of the reducers
  */
 describe('actions', () => {
-
   it('setArticles must set articles', () => {
-    const newValueArticles = [{  
+    const newValueArticles = [{
       id: 1,
       title: 'un titre',
       description: 'une description',
@@ -39,15 +38,16 @@ describe('actions', () => {
       updateDate: null,
       authorId: 2,
       authorPseudo: '',
-      tagId: "",
+      tagId: '',
       tagName: 'News',
-    preview: '', }];
+      preview: '',
+    }];
     const action = setArticles(newValueArticles);
     const newState = articlesReducer(initialState, action);
     expect(newState).to.be.eql({
-      articles: newValueArticles, 
+      articles: newValueArticles,
       editArticle: false,
-      deleteArticle: false, 
+      deleteArticle: false,
       newArticle: false,
       newTitle: '',
       newDescription: '',
@@ -59,11 +59,43 @@ describe('actions', () => {
   });
 
   it('setAddNewArticle must set add new articles', () => {
-        const newValueArticle = true;
-        const action = setAddNewArticle(newValueArticle);
-        const newState = articlesReducer(initialState, action);
-        expect(newState).to.be.eql({ 
-         articles: [{id: 1,
+    const newValueArticle = true;
+    const action = setAddNewArticle(newValueArticle);
+    const newState = articlesReducer(initialState, action);
+    expect(newState).to.be.eql({
+      articles: [{
+        id: 1,
+        title: '',
+        description: '',
+        createdDate: '',
+        updateDate: null,
+        authorId: 2,
+        authorPseudo: '',
+        tagId: 1,
+        tagName: '',
+        preview: '',
+      }],
+      editArticle: false,
+      deleteArticle: false,
+      newArticle: newValueArticle,
+      newTitle: '',
+      newDescription: '',
+      newTagId: '',
+      loadingArticles: true,
+      newArticleDate: '',
+      idArticle: '',
+    });
+  });
+
+  it('setFieldValueArticle must set field value articles', () => {
+    const titleValue = 'un titre';
+    const titleName = 'newTitle';
+    const action = setFieldValueArticle(titleValue, titleName);
+    const newState = articlesReducer(initialState, action);
+    expect(newState).to.be.eql({
+      articles:
+          [{
+            id: 1,
             title: '',
             description: '',
             createdDate: '',
@@ -73,48 +105,16 @@ describe('actions', () => {
             tagId: 1,
             tagName: '',
             preview: '',
-            }],
-            editArticle: false,
-            deleteArticle: false,
-            newArticle: newValueArticle,
-            newTitle: '',
-            newDescription: '',
-            newTagId: '',
-            loadingArticles: true,
-            newArticleDate: '',
-            idArticle: '',
-          });
-      });
-  
-
-
-  it('setFieldValueArticle must set field value articles', () => {
-        const titleValue = 'un titre';
-        const titleName = 'newTitle'
-        const action = setFieldValueArticle(titleValue,titleName);
-        const newState = articlesReducer(initialState, action);
-        expect(newState).to.be.eql({ 
-          articles: 
-          [{id: 1,
-          title: '',
-          description: '',
-          createdDate: '',
-          updateDate: null,
-          authorId: 2,
-          authorPseudo: '',
-          tagId: 1,
-          tagName: '',
-          preview: '',
           }],
-          editArticle: false,
-          deleteArticle: false,
-          newArticle: false,
-          newTitle: titleValue,
-          newDescription: '',
-          loadingArticles: true,
-          newTagId: '',
-          newArticleDate: '',
-          idArticle: '',
-        });
-      });
+      editArticle: false,
+      deleteArticle: false,
+      newArticle: false,
+      newTitle: titleValue,
+      newDescription: '',
+      loadingArticles: true,
+      newTagId: '',
+      newArticleDate: '',
+      idArticle: '',
+    });
+  });
 });

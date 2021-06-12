@@ -1,11 +1,17 @@
 import { connect } from 'react-redux';
 import OneArticle from 'src/components/OneArticle';
 import {
-  setFieldValueArticle, sendEditArticle, sendDeleteArticle, idArticleSelected, editDescription, editNewTitle,fetchArticles
+  setFieldValueArticle,
+  sendEditArticle,
+  sendDeleteArticle,
+  idArticleSelected,
+  editDescription,
+  editNewTitle,
+  fetchArticles,
 } from 'src/actions/articles';
 import { fetchGames } from 'src/actions/games';
 import { fetchEvents } from 'src/actions/events';
-import {  setError,setUserIsSignIn,setMessage } from 'src/actions/user';
+import { setError, setUserIsSignIn, setMessage } from 'src/actions/user';
 
 const mapStateToProps = (state) => (
   {
@@ -22,7 +28,7 @@ const mapStateToProps = (state) => (
     errorDeleteArticle: state.user.errorDeleteArticle,
     message: state.user.message,
     loadingArticles: state.articles.loadingArticles,
-    errorArticles:state.user.errorArticles,
+    errorArticles: state.user.errorArticles,
   });
 const mapDispatchToProps = (dispatch) => ({
   idArticleSelected: (id) => dispatch(idArticleSelected(id)),
@@ -34,9 +40,9 @@ const mapDispatchToProps = (dispatch) => ({
   fetchArticles: () => dispatch(fetchArticles()),
   fetchGames: () => dispatch(fetchGames()),
   fetchEvents: () => dispatch(fetchEvents()),
-  setMessage:(message, name)=> dispatch(setMessage(message, name)),
+  setMessage: (message, name) => dispatch(setMessage(message, name)),
   setError: (error) => dispatch(setError(error)),
-  setUserIsSignIn: (bool) => dispatch(setUserIsSignIn(bool)),
+  setUserIsSignIn: (boolean) => dispatch(setUserIsSignIn(boolean)),
   handleBlur: (error, name) => dispatch(setError(error, name)),
 
 });

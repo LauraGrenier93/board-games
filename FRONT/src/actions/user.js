@@ -10,7 +10,7 @@ export const SET_MESSAGE = 'SET_MESSAGE';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_LOADING = 'SET_LOADING';
 
-//creation of an action
+// creation of an action
 /**
  * Action to update the value of a formulair field in the store
  * @param {String} value
@@ -40,18 +40,23 @@ export const sendSignInForm = () => ({
 /**
  * Action to update user and login props to true in the store
  */
-export const login = (email, firstname, id, lastname, logged, pseudo,role) => {
-  return({
+export const login = (email, firstname, id, lastname, logged, pseudo, role) => ({
   type: LOGIN,
-  email, firstname, id, lastname, logged, pseudo,role,
+  email,
+  firstname,
+  id,
+  lastname,
+  logged,
+  pseudo,
+  role,
 });
-}
+
 /**
  * Action to update logged to false and initialise the user props in the store
  */
-export const logout = (bool) => ({
+export const logout = (boolean) => ({
   type: LOGOUT,
-  bool
+  boolean,
 });
 
 /**
@@ -71,7 +76,7 @@ export const sendDisconnect = () => ({
 });
 /**
  * Action that displays success messages
- * @param {string} message 
+ * @param {string} message
  */
 export const setMessage = (message, name) => ({
   type: SET_MESSAGE,
@@ -81,7 +86,7 @@ export const setMessage = (message, name) => ({
 
 /**
  * Action that displays error messages
- * @param {string} error 
+ * @param {string} error
 * @param {string} name
  */
 export const setError = (error, name) => ({
@@ -92,11 +97,11 @@ export const setError = (error, name) => ({
 
 /**
  * Action that displays or hidden loader
- * @param {bool} bool 
- * @param {string} name 
+ * @param {bool} boolean
+ * @param {string} name
  */
-export const setLoading = (bool, name) => ({
-  type : SET_LOADING,
-  bool,
+export const setLoading = (boolean, name) => ({
+  type: SET_LOADING,
+  boolean,
   name,
-})
+});

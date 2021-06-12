@@ -44,14 +44,13 @@ CardGame.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   preview: PropTypes.string.isRequired,
-  gameType: PropTypes.string,
-  minAge: PropTypes.number,
-  duration: PropTypes.objectOf(PropTypes.number),
-  quantity: PropTypes.number,
-  minPlayer: PropTypes.number,
-  maxPlayer: PropTypes.number,
-  gameCategories: PropTypes.arrayOf(PropTypes.string),
+  gameType: PropTypes.string.isRequired,
+  minAge: PropTypes.number.isRequired,
+  duration: PropTypes.objectOf(PropTypes.number).isRequired,
+  quantity: PropTypes.number.isRequired,
+  minPlayer: PropTypes.number.isRequired,
+  maxPlayer: PropTypes.number.isRequired,
+  gameCategories: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
-
 
 export default CardGame;

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-empty */
 import {
   SEND_UNSUBSCRIBE,
@@ -8,7 +9,7 @@ import {
   setAddNewEvent,
   setParticipate,
 } from 'src/actions/events';
-import { setError,setLoading } from 'src/actions/user'; 
+import { setError, setLoading } from 'src/actions/user';
 import axios from 'src/api';
 
 export default (store) => (next) => async (action) => {
@@ -28,11 +29,10 @@ export default (store) => (next) => async (action) => {
       catch (error) {
         store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu afficher les évènements.', 'errorEvents'));
       }
-      finally{
+      finally {
         store.dispatch(setLoading(false, 'loadingEvents'));
-        return next(action);
       }
-
+      return next(action);
     }
     case PARTICIPATION: {
       try {
@@ -75,19 +75,19 @@ export default (store) => (next) => async (action) => {
       }
 
       catch (error) {
-        if(error.response.data === '"title" is not allowed to be empty'){
+        if (error.response.data === '"title" is not allowed to be empty') {
           store.dispatch(setError('Le champs titre de l\'évènement ne peut être vide.', 'errorAddEvent'));
         }
-        else if(error.response.data ==='"description" is not allowed to be empty'){
+        else if (error.response.data === '"description" is not allowed to be empty') {
           store.dispatch(setError('Le champs description de l\'évènement ne peut être vide.', 'errorAddEvent'));
         }
-        else if(error.response.data ==='"description" length must be at least 15 characters long'){
+        else if (error.response.data === '"description" length must be at least 15 characters long') {
           store.dispatch(setError('La description de l\'évènement doit contenir au moins 15 caractères.', 'errorAddEvent'));
         }
-        else if(error.response.data ==='"eventDate" must be a valid date'){
+        else if (error.response.data === '"eventDate" must be a valid date') {
           store.dispatch(setError('Il manque la date de l\'évènement.', 'errorAddEvent'));
         }
-        else if(error.response.data ==='"tagId" must be a number'){
+        else if (error.response.data === '"tagId" must be a number') {
           store.dispatch(setError('Il manque la catégorie de l\'évènement.', 'errorAddEvent'));
         }
         else {

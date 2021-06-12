@@ -77,7 +77,7 @@ const Header = ({ isLogged, sendDisconnect }) => {
   );
 };
 Header.propTypes = {
-  isLogged: PropTypes.bool,
+  isLogged: PropTypes.bool.isRequired,
   sendDisconnect: PropTypes.func.isRequired,
 };
 

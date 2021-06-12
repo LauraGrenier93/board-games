@@ -1,15 +1,17 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable linebreak-style */
 /**
  * function that checks the first or last name of a field
  * @param {string} name - value of the entered lastname or firstname
  */
- const validationName = (name) => {
+const validationName = (name) => {
   const regexName = /^\S{2,}$/;
   return regexName.test(name);
 };
 
 /**
  * function that checks the pseudo
- * @param {string} pseudo - 
+ * @param {string} pseudo -
  */
 const validationPseudo = (pseudo) => {
   const regexPseudo = /^\S{3,40}$/;
@@ -21,7 +23,7 @@ const validationPseudo = (pseudo) => {
  * @param {string} password
  */
 const validationPassword = (password) => {
-  const regexPassword = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/
+  const regexPassword = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
   return regexPassword.test(password);
 };
 
@@ -38,7 +40,7 @@ const validationEmail = (email) => {
  * function to check the length of the item description
  * @param {string} description
  */
- const validationNewDescription = (description) => {
+const validationNewDescription = (description) => {
   const regexDescription = /^(.{15,})$/;
   return regexDescription.test(description);
 };
@@ -71,7 +73,7 @@ export const validationForm = (valueInput, nameInput, placeholder) => {
   if (nameInput === 'pseudo' && (!validationPseudo(valueInput))) {
     return `front Le champs de votre ${placeholder} doit contenir au minimum 3 caractères et 40 au maximum, sans espace.`;
   }
-  if (nameInput ==='newDescription' && (!validationNewDescription(valueInput))) {
+  if (nameInput === 'newDescription' && (!validationNewDescription(valueInput))) {
     return `front Le champs de votre ${placeholder} doit contenir un minimum de 15 caractères`;
   }
   return '';

@@ -1,13 +1,12 @@
 import { expect, should } from 'chai';
-import { findIdBySlug, randomArray, getHighestId, lastArray } from 'src/selectors';
+import {
+  findIdBySlug, randomArray, getHighestId, lastArray,
+} from 'src/selectors';
 
 should();
 
-
 describe('selectors', () => {
-
   describe('findIdBySlug', () => {
-
     const dataValues = [
       {
         id: 1,
@@ -42,18 +41,15 @@ describe('selectors', () => {
     });
 
     it('must return a undefined if not match', () => {
-
       expect(findIdBySlug(dataValues, 'notfound')).to.be.undefined;
     });
 
     it('must not throw if slug is undefined', () => {
-
-      expect(() =>findIdBySlug(dataValues, undefined).to.not.throw());
+      expect(() => findIdBySlug(dataValues, undefined).to.not.throw());
     });
   });
 
   describe('randomArray', () => {
-
     const dataValues = [
       {
         id: 1,
@@ -101,7 +97,7 @@ describe('selectors', () => {
         tagId: 1,
         tagName: '',
         preview: '',
-      }
+      },
     ];
     const arrayVoid = [];
 
@@ -117,13 +113,12 @@ describe('selectors', () => {
       expect(randomArray(dataValues)).to.have.lengthOf(2);
     });
 
-        it('must return a matching lenght array=0 ', () => {
-          expect(() =>randomArray(arrayVoid).to.not.throw());
-        });
-  })
+    it('must return a matching lenght array=0 ', () => {
+      expect(() => randomArray(arrayVoid).to.not.throw());
+    });
+  });
 
   describe('getHighestId', () => {
-
     const dataValues = [
       {
         id: 1,
@@ -148,7 +143,7 @@ describe('selectors', () => {
         tagName: '',
         preview: '',
       }];
-      const arrayVoid = [];
+    const arrayVoid = [];
 
     it('getHighestId must be a function', () => {
       getHighestId.should.be.a('function');
@@ -163,43 +158,40 @@ describe('selectors', () => {
     });
   });
 
-
-describe('lastArray', () => {
-  const dataValues = [
-    {
-      id: 1,
-      title: '',
-      description: '',
-      createdDate: '',
-      updateDate: null,
-      authorId: 2,
-      authorPseudo: '',
-      tagId: 1,
-      tagName: '',
-      preview: '',
-    }, {
-      id: 2,
-      title: '',
-      description: '',
-      createdDate: '',
-      updateDate: null,
-      authorId: 2,
-      authorPseudo: '',
-      tagId: 1,
-      tagName: '',
-      preview: '',
-    }];
+  describe('lastArray', () => {
+    const dataValues = [
+      {
+        id: 1,
+        title: '',
+        description: '',
+        createdDate: '',
+        updateDate: null,
+        authorId: 2,
+        authorPseudo: '',
+        tagId: 1,
+        tagName: '',
+        preview: '',
+      }, {
+        id: 2,
+        title: '',
+        description: '',
+        createdDate: '',
+        updateDate: null,
+        authorId: 2,
+        authorPseudo: '',
+        tagId: 1,
+        tagName: '',
+        preview: '',
+      }];
     const arrayVoid = [];
-  it('lastArray must be a function', () => {
-    lastArray.should.be.a('function');
+    it('lastArray must be a function', () => {
+      lastArray.should.be.a('function');
+    });
+    it('getHighestId must return a matching array', () => {
+      lastArray(dataValues).should.be.an('array');
+    });
+    it('lastArray must return a undefined if not match', () => {
+      expect(() => lastArray(arrayVoid)).to.not.throw();
+    });
   });
-  it('getHighestId must return a matching array', () => {
-    lastArray(dataValues).should.be.an('array');
-  });
-  it('lastArray must return a undefined if not match', () => {
-    expect(() => lastArray(arrayVoid)).to.not.throw();
-  });
-});
-
-
 });

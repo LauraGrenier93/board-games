@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { connect } from 'react-redux';
 import Header from 'src/components/Header';
 import { sendDisconnect } from 'src/actions/user';

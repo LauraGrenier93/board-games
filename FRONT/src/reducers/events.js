@@ -6,7 +6,8 @@ import {
   SET_PARTICIPATE,
   INIT_VALUE_ADD_NEW_EVENT,
 } from 'src/actions/events';
-import {  SET_LOADING} from 'src/actions/user';
+import { SET_LOADING } from 'src/actions/user';
+
 export const initialState = {
   events: [
     {
@@ -32,7 +33,7 @@ export const initialState = {
   toParticipate: false,
   newEvent: false,
   loadingEvents: true,
-  editEvent:false,
+  editEvent: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -56,15 +57,15 @@ export default (state = initialState, action = {}) => {
     case SET_ADD_NEW_EVENT:
       return {
         ...state,
-        newEvent: action.bool,
+        newEvent: action.boolean,
       };
     case SET_PARTICIPATE:
       return {
         ...state,
-        toParticipate: action.bool,
+        toParticipate: action.boolean,
       };
     case INIT_VALUE_ADD_NEW_EVENT:
-      return{
+      return {
         ...state,
         newTitle: '',
         newDescription: '',
@@ -72,12 +73,12 @@ export default (state = initialState, action = {}) => {
         newTagId: '',
         idEvent: '',
         newEvent: false,
-      }
-      case SET_LOADING:
-        return {
-          ...state,
-          [action.name]: action.bool, 
-        }
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        [action.name]: action.boolean,
+      };
     default:
       return state;
   }

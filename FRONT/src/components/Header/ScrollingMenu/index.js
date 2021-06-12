@@ -17,9 +17,9 @@ const ScrollingMenu = ({ isLogged, sendDisconnect }) => {
         <Dropdown.Menu>
           {isLogged && (
             <>
-          <button type="button" className="button_deconnexion" onClick={handleClick}>Déconnexion</button>
-          <Dropdown.Item as={Link} to="/profil">Profil</Dropdown.Item>
-          </>
+              <button type="button" className="button_deconnexion" onClick={handleClick}>Déconnexion</button>
+              <Dropdown.Item as={Link} to="/profil">Profil</Dropdown.Item>
+            </>
           )}
           {!isLogged && (
             <>
@@ -37,7 +37,7 @@ const ScrollingMenu = ({ isLogged, sendDisconnect }) => {
   );
 };
 ScrollingMenu.propTypes = {
-  isLogged: PropTypes.bool,
+  isLogged: PropTypes.bool.isRequired,
   sendDisconnect: PropTypes.func.isRequired,
 };
 

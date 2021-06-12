@@ -1,4 +1,4 @@
-
+/* eslint-disable linebreak-style */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -6,7 +6,6 @@ import {
   Switch,
 } from 'react-router-dom';
 import { findIdBySlug } from 'src/selectors';
-
 import Header from 'src/containers/Header';
 import Home from 'src/containers/Home';
 import OneArticle from 'src/containers/OneArticle';
@@ -30,7 +29,6 @@ import medieval3 from 'src/assets/medieval3.jpg';
 
 import './styles.css';
 
-
 const App = (
   {
     fetchArticles,
@@ -47,8 +45,8 @@ const App = (
  */
   useEffect(() => {
     fetchArticles();
-    fetchEvents(); 
-    fetchGames(); 
+    fetchEvents();
+    fetchGames();
   }, []);
   return (
     <div className="app" style={{ background: `url(${medieval3})` }}>
@@ -127,7 +125,7 @@ App.propTypes = {
   events: PropTypes.array.isRequired,
   articles: PropTypes.array.isRequired,
   games: PropTypes.array.isRequired,
-  isLogged: PropTypes.bool,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 export default App;

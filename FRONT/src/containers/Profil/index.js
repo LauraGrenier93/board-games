@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { connect } from 'react-redux';
 import Profil from 'src/components/Profil';
 
