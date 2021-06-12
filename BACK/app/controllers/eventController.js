@@ -101,13 +101,13 @@ const eventController = {
     try {
       const { id } = req.params;
 
-      const NewData = {};
-      NewData.title = req.sanitize(req.body.title);
-      NewData.description = req.sanitize(req.body.description);
-      NewData.eventDate = req.sanitize(req.body.eventDate);
-      NewData.creatorId = req.sanitize(req.body.creatorId);
-      NewData.eventGames = req.sanitize(req.body.eventGames);
-      NewData.tagId = req.sanitize(req.body.tagId);
+      const newData = {};
+      newData.title = req.sanitize(req.body.title);
+      newData.description = req.sanitize(req.body.description);
+      newData.eventDate = req.sanitize(req.body.eventDate);
+      newData.creatorId = req.sanitize(req.body.creatorId);
+      newData.eventGames = req.sanitize(req.body.eventGames);
+      newData.tagId = req.sanitize(req.body.tagId);
       const event = await Event.findOne(id);
 
       if (newData.title) {
