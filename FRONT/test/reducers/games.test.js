@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import { expect } from 'chai';
 import gamesReducer, { initialState } from 'src/reducers/games';
 import { setGames } from 'src/actions/games';

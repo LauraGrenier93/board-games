@@ -14,7 +14,7 @@ describe('<Article />', () => {
       title: '',
       description: '',
       createdDate: '',
-      updateDate: null,
+      updateDate: '',
       authorId: 2,
       authorPseudo: '',
       tagId: 1,

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable linebreak-style */
 import { expect } from 'chai';
 import articlesReducer, { initialState } from 'src/reducers/articles';
@@ -35,7 +36,7 @@ describe('actions', () => {
       title: 'un titre',
       description: 'une description',
       createdDate: '',
-      updateDate: null,
+      updateDate: '',
       authorId: 2,
       authorPseudo: '',
       tagId: '',
@@ -68,7 +69,7 @@ describe('actions', () => {
         title: '',
         description: '',
         createdDate: '',
-        updateDate: null,
+        updateDate: '',
         authorId: 2,
         authorPseudo: '',
         tagId: 1,
@@ -99,7 +100,7 @@ describe('actions', () => {
             title: '',
             description: '',
             createdDate: '',
-            updateDate: null,
+            updateDate: '',
             authorId: 2,
             authorPseudo: '',
             tagId: 1,

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable linebreak-style */
 import { expect } from 'chai';
 import eventsReducer, { initialState } from 'src/reducers/events';
@@ -52,6 +53,7 @@ describe('actions', () => {
       toParticipate: false,
       newEvent: false,
       editEvent: false,
+      deleteEvent: false,
       loadingEvents: true,
     });
   });
@@ -66,7 +68,7 @@ describe('actions', () => {
         description: '',
         eventDate: '',
         createdDate: '',
-        updateDate: null,
+        updateDate: '',
         creatorId: 2,
         tagId: 2,
         eventTag: '',
@@ -83,6 +85,7 @@ describe('actions', () => {
       toParticipate: false,
       newEvent: newValueEvent,
       editEvent: false,
+      deleteEvent: false,
       loadingEvents: true,
     });
   });
@@ -99,7 +102,7 @@ describe('actions', () => {
         description: '',
         eventDate: '',
         createdDate: '',
-        updateDate: null,
+        updateDate: '',
         creatorId: 2,
         tagId: 2,
         eventTag: '',
@@ -116,6 +119,7 @@ describe('actions', () => {
       toParticipate: false,
       newEvent: false,
       editEvent: false,
+      deleteEvent: false,
       loadingEvents: true,
     });
   });
@@ -130,7 +134,7 @@ describe('actions', () => {
         description: '',
         eventDate: '',
         createdDate: '',
-        updateDate: null,
+        updateDate: '',
         creatorId: 2,
         tagId: 2,
         eventTag: '',
@@ -147,6 +151,7 @@ describe('actions', () => {
       toParticipate: false,
       newEvent: false,
       editEvent: false,
+      deleteEvent: false,
       loadingEvents: true,
     });
   });
@@ -162,7 +167,7 @@ describe('actions', () => {
         description: '',
         eventDate: '',
         createdDate: '',
-        updateDate: null,
+        updateDate: '',
         creatorId: 2,
         tagId: 2,
         eventTag: '',
@@ -179,6 +184,7 @@ describe('actions', () => {
       toParticipate,
       newEvent: false,
       editEvent: false,
+      deleteEvent: false,
       loadingEvents: true,
     });
   });
