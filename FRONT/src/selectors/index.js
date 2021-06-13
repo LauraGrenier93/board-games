@@ -81,3 +81,8 @@ export const nameTagIdEvent = (tagId) => {
   }
   return tag;
 };
+
+/**
+   * function that checks that the member is not already registered
+   */
+export const checkMember = (array, pseudo) => array.find((participant) => participant === pseudo);

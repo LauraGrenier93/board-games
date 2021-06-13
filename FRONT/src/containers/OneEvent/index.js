@@ -12,6 +12,7 @@ import {
   sendEditEvent,
   editNewTitleEvent,
   editDescriptionEvent,
+  setParticipate,
 } from 'src/actions/events';
 import { setMessage, setError } from 'src/actions/user';
 import { fetchGames } from 'src/actions/games';
@@ -51,6 +52,7 @@ const mapDispatchToProps = (dispatch) => ({
   handleBlur: (error, name) => dispatch(setError(error, name)),
   editNewTitle: (title) => dispatch(editNewTitleEvent(title)),
   editDescription: (description) => dispatch(editDescriptionEvent(description)),
+  setParticipate: (boolean) => dispatch(setParticipate(boolean)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OneEvent);

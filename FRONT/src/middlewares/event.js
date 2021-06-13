@@ -56,7 +56,6 @@ export default (store) => (next) => async (action) => {
         }, options);
         store.dispatch(setParticipate(true));
       }
-
       catch (error) {
         store.dispatch(setError('Nous avons eu un problème technique, nous n\'avons pas pu ajouter votre participation à l\'évènement.', 'errorEditEvent'));
       }
@@ -159,7 +158,7 @@ export default (store) => (next) => async (action) => {
       }
 
       catch (error) {
-        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu supprimer votre participation à l\'évènement.'));
+        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu supprimer votre participation à l\'évènement.', 'errorEditEvent'));
       }
       return next(action);
     }

@@ -177,8 +177,8 @@ Events.propTypes = {
   initValueAddNewEvent: PropTypes.func.isRequired,
   fetchEvents: PropTypes.func.isRequired,
   setMessage: PropTypes.func.isRequired,
-  newTitle: PropTypes.string.isRequired,
-  newDescription: PropTypes.string.isRequired,
+  newTitle: PropTypes.string,
+  newDescription: PropTypes.string,
   newEventDate: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,
   handleBlur: PropTypes.func.isRequired,
@@ -193,6 +193,11 @@ Events.propTypes = {
   addNewEvent: PropTypes.bool.isRequired,
   deleteEvent: PropTypes.bool.isRequired,
   loadingEvents: PropTypes.bool.isRequired,
+};
+
+Events.defaultProps = {
+  newTitle: '',
+  newDescription: '',
 };
 
 export default Events;

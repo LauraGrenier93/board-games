@@ -84,7 +84,7 @@ const eventController = {
     }
   },
   /**
-  * A method that supports the updating of an article in the DB
+  * A method that supports the updating of an event in the DB
   * @name updateEvent
   * @property {int} id - the id of the searched event
   * @property {string} title - the title an event should have

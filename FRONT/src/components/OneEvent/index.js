@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import Field from 'src/components/Field';
 import TextAreaDescription from 'src/components/TextAreaDescription';
-import { nameTagIdEvent } from 'src/selectors';
+import { nameTagIdEvent, checkMember } from 'src/selectors';
 import './styles.css';
 
 const OneEvent = ({
@@ -23,6 +23,7 @@ const OneEvent = ({
   deleteEvent,
   sendDeleteEvent,
   participation,
+  setParticipate,
   idEventSelected,
   toParticipate,
   unsubscribe,
@@ -61,6 +62,12 @@ const OneEvent = ({
     }
     if (!newDescription) {
       editDescription(event.description);
+    }
+    if (isLogged && !!checkMember(event.eventParticipants, pseudo)) {
+      setParticipate(true);
+    }
+    else {
+      setParticipate(false);
     }
   }, [!event]);
 
@@ -294,75 +301,78 @@ const OneEvent = ({
                             <Card.Description>
                               {event.description}
                             </Card.Description>
-                            {(isLogged && toParticipate) && (
-                            <>
-                              <p className="participation">les participants sont :
-                                {event.eventParticipants.map((participant) => (
-                                  <li key={participant.toString()}>
-                                    {participant}
-                                  </li>
-                                ))}
+                            {(isLogged && !!toParticipate) && (
+                              <>
+                                <Modal
+                                  id="unsubscribe"
+                                  onClose={() => setOpenUnsubscribe(false)}
+                                  onOpen={() => setOpenUnsubscribe(true)}
+                                  open={openUnsubscribe}
+                                  trigger={<Button><Icon name="remove user" /></Button>}
+                                >
 
-                              </p>
+                                  <Modal.Header>
+                                    désincription à l'évènement {event.title}
+                                  </Modal.Header>
+                                  <Modal.Description>
+                                    <p>
+                                      voulez-vous vous désinscrire de l'évènement {event.title}
+                                      pour la date du ${event.eventDate}?
+                                    </p>
+                                  </Modal.Description>
+                                  <Modal.Actions>
+                                    <Button onClick={() => setOpenUnsubscribe(false)}>
+                                      Non
+                                    </Button>
+                                    <Button
+                                      content="Oui"
+                                      labelPosition="right"
+                                      onClick={handleClickUnsubscribe}
+                                    />
+                                  </Modal.Actions>
+                                </Modal>
 
+                                <p className="participation">les participants sont :
+                                  {event.eventParticipants.map((participant) => (
+                                    <li key={participant.toString()}>
+                                      {participant}
+                                    </li>
+                                  ))}
+                                </p>
+                              </>
+                            )}
+                            {(isLogged && !toParticipate) && (
                               <Modal
-                                id="unsubscribe"
-                                onClose={() => setOpenUnsubscribe(false)}
-                                onOpen={() => setOpenUnsubscribe(true)}
-                                open={openUnsubscribe}
-                                trigger={<Button><Icon name="remove user" /></Button>}
+                                id="participation"
+                                onClose={() => setOpenParticipation(false)}
+                                onOpen={() => setOpenParticipation(true)}
+                                open={openParticipation}
+                                trigger={<Button><Icon name="user plus" /></Button>}
                               >
 
                                 <Modal.Header>
-                                  désincription à l'évènement {event.title}
+                                  Participation à l'évènement {event.title}
                                 </Modal.Header>
                                 <Modal.Description>
                                   <p>
-                                    voulez-vous vous désinscrire de l'évènement {event.title}
-                                    pour la date du ${event.eventDate}?
+                                    voulez-vous participer à l'évènement {event.title}
+                                    pour la date du {event.eventDate}?
                                   </p>
                                 </Modal.Description>
                                 <Modal.Actions>
-                                  <Button onClick={() => setOpenUnsubscribe(false)}>
+                                  <Button onClick={() => setOpenParticipation(false)}>
                                     Non
                                   </Button>
                                   <Button
                                     content="Oui"
                                     labelPosition="right"
-                                    onClick={handleClickUnsubscribe}
+                                    onClick={handleClickparticipation}
                                   />
                                 </Modal.Actions>
                               </Modal>
-                            </>
-                            )}
-                            {(isLogged && !toParticipate) && (
-                            <Modal
-                              id="participation"
-                              onClose={() => setOpenParticipation(false)}
-                              onOpen={() => setOpenParticipation(true)}
-                              open={openParticipation}
-                              trigger={<Button><Icon name="user plus" /></Button>}
-                            >
 
-                              <Modal.Header>Participation à l'évènement {event.title}</Modal.Header>
-                              <Modal.Description>
-                                <p>
-                                  voulez-vous participer à l'évènement {event.title}
-                                  pour la date du {event.eventDate}?
-                                </p>
-                              </Modal.Description>
-                              <Modal.Actions>
-                                <Button onClick={() => setOpenParticipation(false)}>
-                                  Non
-                                </Button>
-                                <Button
-                                  content="Oui"
-                                  labelPosition="right"
-                                  onClick={handleClickparticipation}
-                                />
-                              </Modal.Actions>
-                            </Modal>
-                            )}
+                            )};
+
                           </Card.Content>
                         </Card>
                       </>
@@ -391,6 +401,7 @@ OneEvent.propTypes = {
   setMessage: PropTypes.func.isRequired,
   editNewTitle: PropTypes.func.isRequired,
   editDescription: PropTypes.func.isRequired,
+  setParticipate: PropTypes.func.isRequired,
   toParticipate: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   loadingEvents: PropTypes.bool.isRequired,
