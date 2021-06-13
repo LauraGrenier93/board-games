@@ -6,6 +6,7 @@ import {
   SET_FIELD_VALUE_EVENT,
   SET_ADD_NEW_EVENT,
   SET_EDIT_EVENT,
+  SET_DELETE_EVENT,
   SET_PARTICIPATE,
   EDIT_NEW_DESCRIPTION_EVENT,
   EDIT_NEW_TITLE_EVENT,
@@ -39,6 +40,7 @@ export const initialState = {
   newEvent: false,
   loadingEvents: true,
   editEvent: false,
+  deleteEvent: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -69,6 +71,11 @@ export default (state = initialState, action = {}) => {
         ...state,
         editEvent: action.boolean,
       };
+    case SET_DELETE_EVENT:
+      return {
+        ...state,
+        deleteEvent: action.boolean,
+      };
     case SET_PARTICIPATE:
       return {
         ...state,
@@ -93,6 +100,7 @@ export default (state = initialState, action = {}) => {
         newTagId: '',
         idEvent: '',
         newEvent: false,
+        deleteEvent: false,
       };
     case SET_LOADING:
       return {

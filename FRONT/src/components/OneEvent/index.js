@@ -8,7 +8,7 @@ import {
   Card, Button, Modal, Icon, Loader,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Field from 'src/components/Field';
 import TextAreaDescription from 'src/components/TextAreaDescription';
 import { nameTagIdEvent } from 'src/selectors';
@@ -20,6 +20,8 @@ const OneEvent = ({
   changeFieldEvent,
   handleEditEvent,
   editEvent,
+  deleteEvent,
+  sendDeleteEvent,
   participation,
   idEventSelected,
   toParticipate,
@@ -80,6 +82,18 @@ const OneEvent = ({
   const [openParticipation, setOpenParticipation] = React.useState(false);
   const [openUnsubscribe, setOpenUnsubscribe] = React.useState(false);
   const [openEditEvent, setOpenEditEvent] = React.useState(false);
+  const [openModalDelete, setOpenModalDelete] = React.useState(false);
+
+  /**
+     * function that is triggered when the form is submitted to delete an item
+     * @param {Event} evt
+     */
+  const handleDeleteEventSubmit = (evt) => {
+    evt.preventDefault();
+    idEventSelected(event.id);
+    sendDeleteEvent();
+    setOpenModalDelete(false);
+  };
 
   const handleClickparticipation = (evt) => {
     evt.preventDefault();
@@ -133,75 +147,107 @@ const OneEvent = ({
               : (
                 <>
                   {pseudo === event.creatorPseudo && (
-                  <Modal
-                    size="fullscreen"
-                    onClose={() => setOpenEditEvent(false)}
-                    onOpen={() => setOpenEditEvent(true)}
-                    open={openEditEvent}
-                    trigger={<Button content="Modifier votre évènement" labelPosition="left" icon="edit" />}
-                  >
-                    <Modal.Header>Modifier un évènement</Modal.Header>
-                    { errors && errors.map((error, index) => (<p key={index.toString()} className="error">{error}</p>))}
-                    <Modal.Description>
-                      <form autoComplete="off" onSubmit={handleEditEventSubmit} className="editEvent">
-                        <Field
-                          name="newTitle"
-                          type="texte"
-                          placeholder="titre de votre évènement"
-                          onChange={changeFieldEvent}
-                          onBlur={handleBlur}
-                          value={newTitle}
+                  <>
+                    {deleteEvent && (
+                    <>
+                      <Redirect to="/evenements" exact />
+                    </>
+                    )}
+                    <Modal
+                      id="delete"
+                      onClose={() => setOpenModalDelete(false)}
+                      onOpen={() => setOpenModalDelete(true)}
+                      open={openModalDelete}
+                      trigger={<Button>Supprimer l'évènement</Button>}
+                    >
+                      <Modal.Header>supprimer l'évènement {event.title}</Modal.Header>
+                      <Modal.Description>
+                        <p>
+                          voulez-vous supprimer l'évènement {event.title}?
+                        </p>
+                      </Modal.Description>
+                      <Modal.Actions>
+                        <Button onClick={() => setOpenModalDelete(false)}>
+                          Non
+                        </Button>
+                        <Button
+                          content="Oui"
+                          labelPosition="right"
+                          onClick={handleDeleteEventSubmit}
                         />
-                        <Field
-                          name="newEventDate"
-                          type="datetime-local"
-                          placeholder="date de l'évènement"
-                          value={newEventDate}
-                          onBlur={handleBlur}
-                          onChange={changeFieldEvent}
-                        />
-                        <div className="button-radio">
+                      </Modal.Actions>
+                    </Modal>
 
+                    <Modal
+                      size="fullscreen"
+                      onClose={() => setOpenEditEvent(false)}
+                      onOpen={() => setOpenEditEvent(true)}
+                      open={openEditEvent}
+                      trigger={<Button content="Modifier votre évènement" labelPosition="left" icon="edit" />}
+                    >
+                      <Modal.Header>Modifier un évènement</Modal.Header>
+                      { errors && errors.map((error, index) => (<p key={index.toString()} className="error">{error}</p>))}
+                      <Modal.Description>
+                        <form autoComplete="off" onSubmit={handleEditEventSubmit} className="editEvent">
                           <Field
-                            name="newTagId"
-                            type="radio"
-                            id="new"
-                            value="1"
+                            name="newTitle"
+                            type="texte"
+                            placeholder="titre de votre évènement"
+                            onChange={changeFieldEvent}
+                            onBlur={handleBlur}
+                            value={newTitle}
+                          />
+                          <Field
+                            name="newEventDate"
+                            type="datetime-local"
+                            placeholder="date de l'évènement"
+                            value={newEventDate}
                             onBlur={handleBlur}
                             onChange={changeFieldEvent}
                           />
-                          <label htmlFor="new">Soirée jeux</label>
+                          <div className="button-radio">
 
-                          <Field
-                            name="newTagId"
-                            type="radio"
-                            id="murderParty"
-                            value="2"
-                            onBlur={handleBlur}
+                            <Field
+                              name="newTagId"
+                              type="radio"
+                              id="new"
+                              value="1"
+                              onBlur={handleBlur}
+                              onChange={changeFieldEvent}
+                            />
+                            <label htmlFor="new">Soirée jeux</label>
+
+                            <Field
+                              name="newTagId"
+                              type="radio"
+                              id="murderParty"
+                              value="2"
+                              onBlur={handleBlur}
+                              onChange={changeFieldEvent}
+                            />
+                            <label htmlFor="murderParty">Murder Partie</label>
+                          </div>
+                          <TextAreaDescription
+                            className="newDescription"
+                            type="text"
+                            name="newDescription"
+                            placeholder="écrivez votre évènement"
                             onChange={changeFieldEvent}
+                            onBlur={handleBlur}
+                            value={newDescription}
                           />
-                          <label htmlFor="murderParty">Murder Partie</label>
-                        </div>
-                        <TextAreaDescription
-                          className="newDescription"
-                          type="text"
-                          name="newDescription"
-                          placeholder="écrivez votre évènement"
-                          onChange={changeFieldEvent}
-                          onBlur={handleBlur}
-                          value={newDescription}
-                        />
 
-                        <Button onClick={() => setOpenEditEvent(false)}>
-                          Annuler
-                        </Button>
-                        <Button onClick={handleEditEventSubmit}>
-                          Valider
-                        </Button>
+                          <Button onClick={() => setOpenEditEvent(false)}>
+                            Annuler
+                          </Button>
+                          <Button onClick={handleEditEventSubmit}>
+                            Valider
+                          </Button>
 
-                      </form>
-                    </Modal.Description>
-                  </Modal>
+                        </form>
+                      </Modal.Description>
+                    </Modal>
+                  </>
                   )}
                   {editEvent
                     ? (
@@ -332,6 +378,7 @@ OneEvent.propTypes = {
   event: PropTypes.object,
   changeFieldEvent: PropTypes.func.isRequired,
   handleEditEvent: PropTypes.func.isRequired,
+  sendDeleteEvent: PropTypes.func.isRequired,
   participation: PropTypes.func.isRequired,
   fetchEvents: PropTypes.func.isRequired,
   fetchArticles: PropTypes.func.isRequired,
@@ -346,6 +393,7 @@ OneEvent.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   loadingEvents: PropTypes.bool.isRequired,
   editEvent: PropTypes.bool.isRequired,
+  deleteEvent: PropTypes.bool.isRequired,
   errorEvents: PropTypes.string.isRequired,
   errorEditEvent: PropTypes.string.isRequired,
   errornewTitle: PropTypes.string.isRequired,

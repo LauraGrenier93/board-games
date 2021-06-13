@@ -41,9 +41,12 @@ CardEvent.propTypes = {
   description: PropTypes.string.isRequired,
   eventDate: PropTypes.string.isRequired,
   createdDate: PropTypes.string.isRequired,
-  updateDate: PropTypes.string.isRequired,
+  updateDate: PropTypes.string,
   eventTag: PropTypes.string.isRequired,
   creatorPseudo: PropTypes.string.isRequired,
+};
+CardEvent.defaultProps = {
+  updateDate: '',
 };
 
 export default CardEvent;

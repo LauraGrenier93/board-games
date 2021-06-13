@@ -24,6 +24,7 @@ const Events = ({
   isLogged,
   fetchEvents,
   addNewEvent,
+  deleteEvent,
   initValueAddNewEvent,
   loadingEvents,
   handleBlur,
@@ -33,6 +34,7 @@ const Events = ({
   errorAddEvent,
   error,
   message,
+  messageEvents,
   setMessage,
 }) => {
   const errorsNewEvent = ['errornewTitle', 'errornewDescription', 'errorAddEvent'];
@@ -49,7 +51,7 @@ const Events = ({
   useEffect(async () => {
     await fetchEvents();
     initValueAddNewEvent();
-  }, [addNewEvent]);
+  }, [addNewEvent, deleteEvent]);
 
   const [open, setOpen] = React.useState(false);
 
@@ -78,6 +80,7 @@ const Events = ({
       {error && <p className="error">{error}</p>}
       {errorAddEvent && <p className="error">{errorAddEvent}</p>}
       {message && <p className="success">{message}</p>}
+      {messageEvents && <p className="success">{messageEvents}</p>}
       {(loadingEvents)
         ? <Loader active inline="centered" />
         : (
@@ -180,6 +183,7 @@ Events.propTypes = {
   error: PropTypes.string.isRequired,
   handleBlur: PropTypes.func.isRequired,
   message: PropTypes.string.isRequired,
+  messageEvents: PropTypes.string.isRequired,
   newTagId: PropTypes.string.isRequired,
   errornewTitle: PropTypes.string.isRequired,
   errornewDescription: PropTypes.string.isRequired,
@@ -187,6 +191,7 @@ Events.propTypes = {
   errorEvents: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   addNewEvent: PropTypes.bool.isRequired,
+  deleteEvent: PropTypes.bool.isRequired,
   loadingEvents: PropTypes.bool.isRequired,
 };
 

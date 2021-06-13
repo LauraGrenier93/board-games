@@ -7,6 +7,8 @@ export const SEND_ADD_EVENT = 'SEND_ADD_EVENT';
 export const SET_EDIT_EVENT = 'SET_EDIT_EVENT';
 export const SEND_EDIT_EVENT = 'SEND_EDIT_EVENT';
 export const SEND_UNSUBSCRIBE = 'SEND_UNSUBSCRIBE';
+export const SEND_DELETE_EVENT = 'SEND_DELETE_EVENT';
+export const SET_DELETE_EVENT = 'SET_DELETE_EVENT';
 export const SET_EVENTS = 'SET_Events';
 export const SET_FIELD_VALUE_EVENT = 'SET_FIELD_VALUE_EVENT';
 export const SET_ADD_NEW_EVENT = 'SET_ADD_NEW_EVENT';
@@ -131,4 +133,19 @@ export const editNewTitleEvent = (title) => ({
 export const editDescriptionEvent = (description) => ({
   type: EDIT_NEW_DESCRIPTION_EVENT,
   description,
+});
+
+/**
+ * action to delete an event
+ */
+export const sendDeleteEvent = () => ({
+  type: SEND_DELETE_EVENT,
+});
+
+/**
+ *  action which, when an event is modified, will trigger its display
+ */
+export const setDeleteEvent = (boolean) => ({
+  type: SET_DELETE_EVENT,
+  boolean,
 });

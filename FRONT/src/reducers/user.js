@@ -22,6 +22,7 @@ export const initialState = {
   logged: false,
   signIn: false,
   messageHome: '',
+  messageEvents: '',
   messageLogin: '',
   message: '',
   errorArticles: '',

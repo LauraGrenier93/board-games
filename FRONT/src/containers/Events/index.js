@@ -16,12 +16,14 @@ const mapStateToProps = (state) => (
     newTagId: state.events.newTagId,
     isLogged: state.user.logged,
     addNewEvent: state.events.newEvent,
+    deleteEvent: state.events.newEvent,
     error: state.user.error,
     errorEvents: state.user.errorEvents,
     errornewTitle: state.user.errornewTitle,
     errornewDescription: state.user.errornewDescription,
     errorAddEvent: state.user.errorAddEvent,
     message: state.user.message,
+    messageEvents: state.user.messageEvents,
     loadingEvents: state.events.loadingEvents,
   });
 

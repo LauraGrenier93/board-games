@@ -5,14 +5,16 @@ import {
   SEND_UNSUBSCRIBE,
   SEND_ADD_EVENT,
   SEND_EDIT_EVENT,
+  SEND_DELETE_EVENT,
   FETCH_EVENTS,
   PARTICIPATION,
   setEvents,
   setAddNewEvent,
   setParticipate,
   setEditEvent,
+  setDeleteEvent,
 } from 'src/actions/events';
-import { setError, setLoading } from 'src/actions/user';
+import { setError, setMessage, setLoading } from 'src/actions/user';
 import axios from 'src/api';
 
 export default (store) => (next) => async (action) => {
@@ -24,6 +26,7 @@ export default (store) => (next) => async (action) => {
   } = store.getState();
   const numberId = parseInt(idUser, 10);
   const urlEditEvent = `/evenements/${idEvent}`;
+  const urlDeleteEvent = `/evenements/${idEvent}`;
   switch (action.type) {
     case FETCH_EVENTS: {
       try {
@@ -55,7 +58,7 @@ export default (store) => (next) => async (action) => {
       }
 
       catch (error) {
-        store.dispatch(setError('Nous avons eu un problème technique, nous n\'avons pas pu ajouter votre participation à l\'évènement.'));
+        store.dispatch(setError('Nous avons eu un problème technique, nous n\'avons pas pu ajouter votre participation à l\'évènement.', 'errorEditEvent'));
       }
       return next(action);
     }
@@ -160,7 +163,24 @@ export default (store) => (next) => async (action) => {
       }
       return next(action);
     }
-
+    case SEND_DELETE_EVENT: {
+      try {
+        const tokens = localStorage.getItem('tokens');
+        const options = {
+          mode: 'cors',
+          headers: {
+            Authorization: `Bearer ${tokens}`,
+          },
+        };
+        await axios.delete(urlDeleteEvent, options);
+        store.dispatch(setDeleteEvent(true));
+        store.dispatch(setMessage('Votre évènement a bien été supprimé', 'messageEvents'));
+      }
+      catch (error) {
+        store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu supprimer l\'évènement.', 'errorDeleteEvent'));
+      }
+      return next(action);
+    }
     default:
       return next(action);
   }

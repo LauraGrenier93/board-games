@@ -88,13 +88,12 @@ export default (store) => (next) => async (action) => {
             Authorization: `Bearer ${tokens}`,
           },
         };
-        const response = await axios.patch(urlEditArticle, {
+        await axios.patch(urlEditArticle, {
           title: newTitle,
           description: newDescription,
           authorId: numberId,
           tagId: newTagIdNumber,
         }, options);
-        console.log('middlewares articles response', response);
         store.dispatch(setEditArticle(true));
       }
       catch (error) {
@@ -124,7 +123,7 @@ export default (store) => (next) => async (action) => {
         };
         await axios.delete(urlDeleteArticle, options);
         store.dispatch(setDeleteArticle(true));
-        store.dispatch(setMessage('Votre article a bien été supprimé'));
+        store.dispatch(setMessage('Votre article a bien été supprimé', 'messageHome'));
       }
       catch (error) {
         store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu supprimer l\'article.', 'errorDeleteArticle'));

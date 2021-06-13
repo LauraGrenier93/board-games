@@ -76,7 +76,7 @@ export const sendDisconnect = () => ({
   type: SEND_DISCONNECT,
 });
 /**
- * Action that displays success messages
+ * Action that displays success message
  * @param {string} message
  */
 export const setMessage = (message, name) => ({
@@ -86,7 +86,7 @@ export const setMessage = (message, name) => ({
 });
 
 /**
- * Action that displays error messages
+ * Action that displays error message
  * @param {string} error
 * @param {string} name
  */
