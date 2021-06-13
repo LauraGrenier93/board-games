@@ -34,6 +34,7 @@ const OneEvent = ({
   loadingEvents,
   errorEvents,
   errorEditEvent,
+  errorDeleteEvent,
   errornewTitle,
   errornewDescription,
   error,
@@ -276,6 +277,7 @@ const OneEvent = ({
                     : (
                       <>
                         {errorEditEvent && <p className="error">{errorEditEvent}</p>}
+                        {errorDeleteEvent && <p className="error">{errorDeleteEvent}</p>}
                         <Card className="cardEvent" style={{ backgroundColor: 'rgba(255, 255, 255, 1.0)' }}>
                           <Card.Content textAlign="center">
                             <Card.Header>{ event.eventTag}</Card.Header>
@@ -396,6 +398,7 @@ OneEvent.propTypes = {
   deleteEvent: PropTypes.bool.isRequired,
   errorEvents: PropTypes.string.isRequired,
   errorEditEvent: PropTypes.string.isRequired,
+  errorDeleteEvent: PropTypes.string.isRequired,
   errornewTitle: PropTypes.string.isRequired,
   errornewDescription: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,

@@ -29,6 +29,7 @@ const mapStateToProps = (state) => (
     deleteEvent: state.events.deleteEvent,
     errorEvents: state.user.errorEvents,
     errorEditEvent: state.user.errorEditEvent,
+    errorDeleteEvent: state.user.errorDeleteEvent,
     errornewTitle: state.user.errornewTitle,
     errornewDescription: state.user.errornewDescription,
     newTitle: state.events.newTitle,

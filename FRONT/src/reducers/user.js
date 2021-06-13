@@ -33,6 +33,7 @@ export const initialState = {
   errorEvents: '',
   errorEditEvent: '',
   errorAddEvent: '',
+  errorDeleteEvent: '',
   errorfirstName: '',
   errorlastName: '',
   errorpseudo: '',
