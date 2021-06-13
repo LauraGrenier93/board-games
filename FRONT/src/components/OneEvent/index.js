@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-shadow */
 /* eslint-disable linebreak-style */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -30,6 +32,8 @@ const OneEvent = ({
   loadingEvents,
   errorEvents,
   errorEditEvent,
+  errornewTitle,
+  errornewDescription,
   error,
   message,
   newTitle,
@@ -40,8 +44,8 @@ const OneEvent = ({
   editNewTitle,
   editDescription,
 }) => {
-  console.log('components OneEvent event.createdDate', event.createdDate);
-  console.log('components OneEvent updateDate.', event.updateDate);
+  const errorsEditEvent = ['errornewTitle', 'errornewDescription', 'errorEditEvent'];
+  const errors = [errornewTitle, errornewDescription, errorEditEvent];
   /**
  * function that is performed once when the page is displayed
  */
@@ -56,6 +60,14 @@ const OneEvent = ({
       editDescription(event.description);
     }
   }, [!event]);
+
+  useEffect(() => {
+    async function info() {
+      await fetchEvents();
+    }
+    info();
+  }, [toParticipate]);
+
   /**
  * function that starts a timer to initialise the message after 20 seconds
  */
@@ -83,13 +95,6 @@ const OneEvent = ({
     setOpenUnsubscribe(false);
   };
 
-  useEffect(() => {
-    async function info() {
-      await fetchEvents();
-    }
-    info();
-  }, [toParticipate]);
-
   /**
  * function that is triggered when the form is submitted to modify an event
  * @param {Event} evt
@@ -102,16 +107,18 @@ const OneEvent = ({
       setOpenEditEvent(false);
     }
     else {
-      handleBlur('Il faut un titre et une description de plus de 15 caractères à votre évènement.', 'errorEvent');
+      handleBlur('Il faut que tout les champs soit remplie et que la description soit de plus de 15 caractères.', 'errorEditEvent');
     }
   };
   /**
    * function that starts a timer to initialise the message after 60 seconds
    */
-  if (errorEditEvent) {
-    setTimeout(() => {
-      handleBlur('', errorEditEvent);
-    }, 60000);
+  if (errorsEditEvent) {
+    for (const error of errorsEditEvent) {
+      setTimeout(() => {
+        handleBlur('', error);
+      }, 60000);
+    }
   }
   return (
     <>
@@ -134,6 +141,7 @@ const OneEvent = ({
                     trigger={<Button content="Modifier votre évènement" labelPosition="left" icon="edit" />}
                   >
                     <Modal.Header>Modifier un évènement</Modal.Header>
+                    { errors && errors.map((error, index) => (<p key={index.toString()} className="error">{error}</p>))}
                     <Modal.Description>
                       <form autoComplete="off" onSubmit={handleEditEventSubmit} className="editEvent">
                         <Field
@@ -340,17 +348,20 @@ OneEvent.propTypes = {
   editEvent: PropTypes.bool.isRequired,
   errorEvents: PropTypes.string.isRequired,
   errorEditEvent: PropTypes.string.isRequired,
+  errornewTitle: PropTypes.string.isRequired,
+  errornewDescription: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
-  newTitle: PropTypes.string.isRequired,
-  newDescription: PropTypes.string.isRequired,
+  newTitle: PropTypes.string,
+  newDescription: PropTypes.string,
   newTagId: PropTypes.string.isRequired,
   newEventDate: PropTypes.string.isRequired,
-
 };
 
 OneEvent.defaultProps = {
   event: {},
+  newTitle: '',
+  newDescription: '',
 };
 
 export default OneEvent;

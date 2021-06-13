@@ -25,6 +25,7 @@ const TextAreaDescription = ({
     const nameInputFr = "description de l'article";
     const message = validationForm(value, name, nameInputFr);
     onBlur(message, `error${name}`);
+    console.log('components TextAreaDescription error+name', `error${name}`);
   };
 
   const inputId = `field-${name}`;

@@ -39,9 +39,13 @@ CardArticle.propTypes = {
   preview: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   createdDate: PropTypes.string.isRequired,
-  updateDate: PropTypes.string.isRequired,
+  updateDate: PropTypes.string,
   tagName: PropTypes.string.isRequired,
   authorPseudo: PropTypes.string.isRequired,
+};
+
+CardArticle.defaultProps = {
+  updateDate: '',
 };
 
 export default CardArticle;

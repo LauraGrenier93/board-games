@@ -24,6 +24,7 @@ const Field = ({
     // console.log('components Field value', value);
     const message = validationForm(value, name, placeholder);
     onBlur(message, `error${name}`);
+    console.log('components Field error+name', `error${name}`);
   };
 
   return (

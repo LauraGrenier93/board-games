@@ -109,18 +109,17 @@ export default (store) => (next) => async (action) => {
             Authorization: `Bearer ${tokens}`,
           },
         };
-        const response = await axios.patch(urlEditEvent, {
+        await axios.patch(urlEditEvent, {
           title: newTitle,
           description: newDescription,
           creatorId: numberId,
           tagId: newTagId,
         }, options);
-        console.log('middlewares event respones', response);
         store.dispatch(setEditEvent(true));
       }
       catch (error) {
         if (error.response.data === '"title" is not allowed to be empty') {
-          store.dispatch(setError('Le champs titre de l\'évènement ne peut être vide. Votre évènement n\'a pas pu être enregistré', 'errorEditEvent'));
+          store.dispatch(setError('Le champs titre de l\'évènement ne peut être vide.', 'errorEditEvent'));
         }
         else if (error.response.data === '"description" is not allowed to be empty') {
           store.dispatch(setError('Le champs description de l\'évènement ne peut être vide.', 'errorEditEvent'));
@@ -128,11 +127,15 @@ export default (store) => (next) => async (action) => {
         else if (error.response.data === '"description" length must be at least 15 characters long') {
           store.dispatch(setError('La description de l\'évènement doit contenir au moins 15 caractères.', 'errorEditEvent'));
         }
-        else {
-          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu  modifier l\'évènement.', 'errorEditEvent'));
+        else if (error.response.data === '"eventDate" must be a valid date') {
+          store.dispatch(setError('Il manque la date de l\'évènement.', 'errorEditEvent'));
         }
-        console.log('error', error);
-        console.log('error.response', error.response);
+        else if (error.response.data === '"tagId" must be a number') {
+          store.dispatch(setError('Il manque la catégorie de l\'évènement.', 'errorEditEvent'));
+        }
+        else {
+          store.dispatch(setError('Suite à un problème technique, nous n\'avons pas pu ajouter l\'évènement.', 'errorEditEvent'));
+        }
       }
       return next(action);
     }

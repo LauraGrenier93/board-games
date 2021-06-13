@@ -27,6 +27,8 @@ const mapStateToProps = (state) => (
     editEvent: state.events.editEvent,
     errorEvents: state.user.errorEvents,
     errorEditEvent: state.user.errorEditEvent,
+    errornewTitle: state.user.errornewTitle,
+    errornewDescription: state.user.errornewDescription,
     newTitle: state.events.newTitle,
     newDescription: state.events.newDescription,
     newTagId: state.events.newTagId,
