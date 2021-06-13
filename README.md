@@ -10,10 +10,10 @@
 
 ## Authors :
 
-* Product Owner : Franck Capon
-* Scrum Master : Laura Grenier
-* Lead dev : Lorène Meslin
-* Git master : Romain Boudet
+* Product Owner/dev-back : Franck Capon
+* Scrum Master/dev-front : Laura Grenier
+* Lead dev/dev-back : Lorène Meslin
+* Git master/dev-back : Romain Boudet
 
 ## Stack
 
