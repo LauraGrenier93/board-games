@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/no-unresolved */
 import { expect } from 'chai';
 import userReducer, { initialState } from 'src/reducers/user';
 import {
@@ -41,6 +42,7 @@ describe('actions', () => {
       errorAddEvent: '',
       errorArticles: '',
       errorDeleteArticle: '',
+      errorDeleteEvent: '',
       errorEditArticle: '',
       errorEditEvent: '',
       errorEvents: '',
@@ -59,6 +61,7 @@ describe('actions', () => {
       newemail: '',
       messageHome: '',
       messageLogin: '',
+      messageEvents: '',
     });
   });
 
@@ -97,6 +100,7 @@ describe('actions', () => {
       errorAddEvent: '',
       errorArticles: '',
       errorDeleteArticle: '',
+      errorDeleteEvent: '',
       errorEditArticle: '',
       errorEditEvent: '',
       errorEvents: '',
@@ -118,6 +122,7 @@ describe('actions', () => {
       newemail: '',
       messageHome: '',
       messageLogin: '',
+      messageEvents: '',
     });
   });
 
@@ -143,6 +148,7 @@ describe('actions', () => {
       errorAddEvent: '',
       errorArticles: '',
       errorDeleteArticle: '',
+      errorDeleteEvent: '',
       errorEditArticle: '',
       errorEditEvent: '',
       errorEvents: '',
@@ -161,6 +167,7 @@ describe('actions', () => {
       newemail: '',
       messageHome: '',
       messageLogin: '',
+      messageEvents: '',
     });
   });
 
@@ -186,6 +193,7 @@ describe('actions', () => {
       errorAddEvent: '',
       errorArticles: '',
       errorDeleteArticle: '',
+      errorDeleteEvent: '',
       errorEditArticle: '',
       errorEditEvent: '',
       errorEvents: '',
@@ -204,6 +212,7 @@ describe('actions', () => {
       newemail: '',
       messageHome: '',
       messageLogin: '',
+      messageEvents: '',
     });
   });
 
@@ -229,6 +238,7 @@ describe('actions', () => {
       errorAddEvent: '',
       errorArticles: '',
       errorDeleteArticle: '',
+      errorDeleteEvent: '',
       errorEditArticle: '',
       errorEditEvent: '',
       errorEvents: '',
@@ -247,6 +257,7 @@ describe('actions', () => {
       newemail: '',
       messageHome: '',
       messageLogin: '',
+      messageEvents: '',
     });
   });
 
@@ -272,6 +283,7 @@ describe('actions', () => {
       errorAddEvent: '',
       errorArticles: '',
       errorDeleteArticle: '',
+      errorDeleteEvent: '',
       errorEditArticle: '',
       errorEditEvent: '',
       errorEvents: '',
@@ -290,6 +302,7 @@ describe('actions', () => {
       newemail: '',
       messageHome: '',
       messageLogin: '',
+      messageEvents: '',
     });
   });
 });
